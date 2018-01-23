@@ -16,6 +16,14 @@ $(document).ready(function() {
       //Upload and validate the data
       //////////////////////////////
 
+      // zip_data = JSZipUtils.getBinaryContent($("#mipfile")[0].files[0], function(err, data) {
+      //   if(err) {
+      //     throw err; // or handle err
+      //   }
+      //   debugger
+      //   return data
+      // })
+
       var req = ocpu.call("zip_validation", {
         mipfile : $("#mipfile")[0].files[0]
       }, function(session){
@@ -68,11 +76,14 @@ $(document).ready(function() {
   //Javascript function using jszip.j / filesaver.js
   //to package .zip output
   function create_zip(session){
-     tab_file = session.getLoc()+'R/.val/tab'
+    tab_file = session.getLoc()+'R/.val/tab'
     data_file = $("#mipfile")[0].files[0];
     file_names = session.getLoc()+'files'
-    // $.get(file_names, function(f){
-      JSZipUtils.getBinaryContent(data_file, function(err, data) {
+    
+     $.get(file_names, function(f){
+      zipname = f.split('\n')[0]
+      filename = zipname.substr(0, f.split('\n')[0].length -8);
+      JSZipUtils.getBinaryContent(file_names+'/data'+filename, function(err, data) {
         if(err) {
           throw err; // or handle err
         }
@@ -90,6 +101,7 @@ $(document).ready(function() {
           });
       });
     });   
+  });
   }
 
   $(document).ajaxStart(function() {
