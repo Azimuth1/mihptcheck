@@ -94,7 +94,7 @@ $(document).ready(function() {
 
           $.get(tab_file, function(d){
               //removing double quotes
-              d = d.replace(/['"]+/g, '')
+              d = d.replace(/['"]+/g, '').replace(/\s+/g, '\t')
               zip.file(filename+'.mhp', d)
               var content = zip.generate({type:"blob"});
               saveAs(content, zipname);
