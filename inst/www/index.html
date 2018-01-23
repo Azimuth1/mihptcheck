@@ -83,6 +83,27 @@
       display: none;  
   }
 
+  .flex-container {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: center;
+    }
+
+.flex-item:nth-child(1) {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: stretch;
+    }
+
+.flex-item:nth-child(2) {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: center;
+    }
+
 </style>
 
 </head>
@@ -93,8 +114,8 @@
       <img id="logo" src="images/icon.png">
   </h1>
   <div>
-    <div>
-      <div id="project_space" class="well">
+    <div class="flex-container">
+      <div id="project_space" class="flex-item well">
         <div id="project_title">MIP Data Converter</div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
@@ -126,6 +147,7 @@
           </div>
         </div>  
       </div>
+      <div id="plotdiv" class="flex-item"></div>      
     </div>
   </div>
 </div>
