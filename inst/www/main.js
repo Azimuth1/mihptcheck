@@ -12,6 +12,10 @@ $(document).ready(function() {
       $("#successdiv").empty();
       $("#errordiv").empty()
 
+      //////////////////////////////
+      //Upload and validate the data
+      //////////////////////////////
+
       var req = ocpu.call("uploaddata", {
         mipfile : $("#mipfile")[0].files[0]
       }, function(session){
@@ -28,10 +32,12 @@ $(document).ready(function() {
     }
   });
   
+  //R output to popup
   function successmsg(text){
     $("#successdiv").empty().append('<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
   }
-  
+
+  //R output to popup
   function errormsg(text){
     $("#convert_button").attr("disabled", "disabled");
     $("#water_level").attr("disabled", "disabled");
@@ -59,10 +65,14 @@ $(document).ready(function() {
   
       file_names = $(this).attr('href')+'files'
       
+      //////////////////////////////
+      //Water level calculations
+      //////////////////////////////
+
       var req = ocpu.call("mip_calculations", {
           //test
-          mipfile : $("#mipfile")[0].files[0]
-          // waterLevel : $('water_level').val()
+          mipfile : $("#mipfile")[0].files[0],
+          water_level : $('#water_level').val()
         }, function(session){
           create_zip(session.getLoc()+'R/.val/tab')
         }).fail(function(jqXHR){
