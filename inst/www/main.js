@@ -98,7 +98,7 @@ $(document).ready(function() {
     tab_file = session.getLoc()+'R/.val/tab'
     data_file = $("#mipfile")[0].files[0];
     file_names = session.getLoc()+'files'
-    
+    //build
      $.get(file_names, function(f){
       zipname = f.split('\n')[0]
       filename = zipname.substr(0, f.split('\n')[0].length -8);
