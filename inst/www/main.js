@@ -24,6 +24,7 @@ $(document).ready(function() {
         $("#convert_button").removeAttr("disabled");
         $("#step_2").css("opacity", 1);
         $("#step_3").css("opacity", 1);
+        // zipContents()
       }).fail(function(jqXHR){
         $("#step_2").css("opacity", 0.2);
         $("#step_3").css("opacity", 0.2);
@@ -67,6 +68,7 @@ $(document).ready(function() {
   
 
       file_names = $(this).attr('href')+'files'
+
       //////////////////////////////
       //Water level calculations
       //////////////////////////////
