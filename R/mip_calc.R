@@ -2,7 +2,7 @@ mip_calc <- function(mipfile, water_level, ...){
 
     # checking pushes
 
-     options(stringsAsFactors = FALSE)
+     #options(stringsAsFactors = FALSE)
 
     # #list files inside zip directory
     # fns <- unzip(mipfile, junkpaths = TRUE, exdir = tempdir())
