@@ -78,12 +78,11 @@ $(document).ready(function() {
 
       //read the value for 'myname'
       var nfield = getRandomInt(1, 1000)
-      var distfield = getRandomInt(1, 10)
 
       //create the plot area on the plotdiv element
       var req = $("#plotdiv").rplot("randomplot", {
           n : nfield,
-          dist : distfield
+          dist : 'normal'
       })
   });
 
