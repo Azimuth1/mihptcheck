@@ -16,10 +16,10 @@ $(document).ready(function() {
       //Upload and validate the data
       //////////////////////////////
 
-      var req = ocpu.call("uploaddata", {
+      var req = ocpu.call("zip_validation", {
         mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-        // $("#convert_button").attr("href", session.getLoc())
+        $("#convert_button").attr("href", session.getLoc())
         $("#water_level").removeAttr("disabled");
         $("#convert_button").removeAttr("disabled");
         $("#step_2").css("opacity", 1);
@@ -62,11 +62,11 @@ $(document).ready(function() {
       });
     });   
   }
-  
+
   $("#convert_button").on("click", function(){
   
+
       file_names = $(this).attr('href')+'files'
-      
       //////////////////////////////
       //Water level calculations
       //////////////////////////////
