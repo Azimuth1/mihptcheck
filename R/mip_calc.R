@@ -1,10 +1,10 @@
 mip_calc <- function(mipfile, water_level, ...){
 
     # checking pushes
-     options(stringsAsFactors = FALSE)
+    # options(stringsAsFactors = FALSE)
 
     # #list files inside zip directory
-    fns <- unzip(mipfile, junkpaths = TRUE, exdir = tempdir())
+    # fns <- unzip(mipfile, junkpaths = TRUE, exdir = tempdir())
 
     # mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
     # mip_file_data <- read.table(fns[1], header=T, quote="\"", sep="\t")
