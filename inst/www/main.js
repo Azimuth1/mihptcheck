@@ -83,7 +83,7 @@ $(document).ready(function() {
      $.get(file_names, function(f){
       zipname = f.split('\n')[0]
       filename = zipname.substr(0, f.split('\n')[0].length -8);
-      JSZipUtils.getBinaryContent(file_names+'/data'+filename, function(err, data) {
+      JSZipUtils.getBinaryContent(file_names+'/'+zipname, function(err, data) {
         if(err) {
           throw err; // or handle err
         }
