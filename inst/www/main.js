@@ -1,6 +1,7 @@
 $(document).ready(function() {
   
   $("#convert_button").attr("disabled", "disabled");
+  $("#preview_button").attr("disabled", "disabled");
   $("#water_level").attr("disabled", "disabled");
 
   //automatically upload CSV file on change.
@@ -23,6 +24,7 @@ $(document).ready(function() {
             $("#convert_button").attr("href", session.getLoc())
             $("#water_level").removeAttr("disabled");
             $("#convert_button").removeAttr("disabled");
+            $("#preview_button").removeAttr("disabled");
             $("#step_2").css("opacity", 1);
             $("#step_3").css("opacity", 1);
 
