@@ -25,6 +25,10 @@
 
 <style>
 
+  /* #step_1{
+    opacity: 0.2;
+  } */
+
   html {
    margin:0;
    padding:0;
@@ -79,27 +83,6 @@
       display: none;  
   }
 
-  .flex-container {
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: flex-start;
-    align-items: center;
-    }
-
-.flex-item:nth-child(1) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: stretch;
-    }
-
-.flex-item:nth-child(2) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: center;
-    }
-
 </style>
 
 </head>
@@ -110,18 +93,18 @@
       <img id="logo" src="images/icon.png">
   </h1>
   <div>
-  <div class="flex-container">
-      <div class= "flex-item" id="project_space" class="well">
+    <div>
+      <div id="project_space" class="well">
         <div id="project_title">MIP Data Converter</div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
-
           <fieldset id="step_1">
             <legend>(1) Load MIP data (.zip containing .mhp)</legend>
+            
               <div class="form-group">
                  <input type="file" id="mipfile">
               </div>
-          </fieldset>
-
+              
+          </fieldset>         
           <fieldset id="step_2">
             <legend>(2) Adjust Water Depth</legend>
             <div class="form-group">
@@ -129,13 +112,11 @@
               <input class="input-medium" id="water_level" type="number" id="max" step="0.05" min="0" max="100" value="10" />
             </div>
           </fieldset>
-
-          <fieldset id="step_3">
-            <legend>(3) Download Converted File</legend>
-            <button id="convert_button" type="button" class="btn btn-primary" disabled="disabled">Do it</button>
-          </fieldset>
+            <fieldset id="step_3">
+              <legend>(3) Download Converted File</legend>
+              <button id="convert_button" type="button" class="btn btn-primary" disabled="disabled">Do it</button>
+            </fieldset>
         </form>
-
         <!-- R Relayed Message and Progress Information -->
         <div id="azimuth_warning">
           <div id="successdiv"></div>
@@ -144,10 +125,8 @@
             <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
           </div>
         </div>  
-
       </div>
-      <div id="plotdiv" class="flex-item"></div>
-  </div>
+    </div>
   </div>
 </div>
 </body>
