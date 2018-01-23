@@ -51,7 +51,7 @@ mip_calc <- function(mipfile, water_level, ...){
     # mip_file_data[ mip_file_data == 'n/a' ] <- NA
     # mip_file_data <- sapply(mip_file_data, as.numeric)
 
-    mip_file_data$["Water Level (ft)"] <- water_level
+    mip_file_data$"Water Level (ft)" <- water_level
 
     return(mip_file_data)
 
