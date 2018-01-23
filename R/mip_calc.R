@@ -42,6 +42,8 @@ mip_calc <- function(mipfile, water_level, ...){
 
     colnames(mip_file_data) <- col_names
 
+    p_grad <- 0.44
+
     mip_file_data$'Water Level (ft)' <- water_level
 
     return(mip_file_data)
