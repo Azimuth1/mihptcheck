@@ -16,7 +16,7 @@ $(document).ready(function() {
       //Upload and validate the data
       //////////////////////////////
 
-      var req = ocpu.call("uploaddata", {
+      var req = ocpu.call("zip_validation", {
         mipfile : $("#mipfile")[0].files[0]
       }, function(session){
         // $("#convert_button").attr("href", session.getLoc())
@@ -24,6 +24,7 @@ $(document).ready(function() {
         $("#convert_button").removeAttr("disabled");
         $("#step_2").css("opacity", 1);
         $("#step_3").css("opacity", 1);
+        zipContents()
       }).fail(function(jqXHR){
         $("#step_2").css("opacity", 0.2);
         $("#step_3").css("opacity", 0.2);
@@ -63,10 +64,21 @@ $(document).ready(function() {
     });   
   }
   
+  function zipContents(){
+    var req = ocpu.call("zip_contents", {
+        mipfile : $("#mipfile")[0].files[0]
+      }, function(session){
+        //success
+        tab_file = session.getLoc()+'R/.val/tab'
+        create_zip(tab_file)
+      }).fail(function(jqXHR){
+        //failure
+        errormsg(jqXHR.responseText);
+    })
+  }
+
   $("#convert_button").on("click", function(){
   
-      file_names = $(this).attr('href')+'files'
-      
       //////////////////////////////
       //Water level calculations
       //////////////////////////////

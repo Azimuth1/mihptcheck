@@ -1,2 +1,3 @@
-export(uploaddata)
+export(zip_validation)
+export(zip_contents)
 export(mip_calc)
