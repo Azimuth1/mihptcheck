@@ -71,7 +71,7 @@ $(document).ready(function() {
       //Water level calculations
       //////////////////////////////
 
-      var req = ocpu.call("mip_calculations", {
+      var req = ocpu.call("mip_calc", {
           mipfile : $("#mipfile")[0].files[0],
           water_level : $('#water_level').val()
         }, function(session){
