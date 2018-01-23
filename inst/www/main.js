@@ -19,15 +19,19 @@ $(document).ready(function() {
         var req = ocpu.call("zip_validation", {
             mipfile : $("#mipfile")[0].files[0]
         }, function(session){
+
             $("#convert_button").attr("href", session.getLoc())
             $("#water_level").removeAttr("disabled");
             $("#convert_button").removeAttr("disabled");
             $("#step_2").css("opacity", 1);
             $("#step_3").css("opacity", 1);
+
         }).fail(function(jqXHR){
+
             $("#step_2").css("opacity", 0.2);
             $("#step_3").css("opacity", 0.2);
             errormsg(jqXHR.responseText);
+
         })
       }
   });
@@ -71,32 +75,32 @@ $(document).ready(function() {
       //Update .zipfile
       //////////////////////////////
 
-    tab_file = session.getLoc()+'R/.val/tab'
-    data_file = $("#mipfile")[0].files[0];
-    file_names = session.getLoc()+'files'
+      tab_file = session.getLoc()+'R/.val/tab'
+      data_file = $("#mipfile")[0].files[0];
+      file_names = session.getLoc()+'files'
 
-    $.get(file_names, function(f){
+      $.get(file_names, function(f){
 
-    zipname = f.split('\n')[0]
-    filename = zipname.substr(0, f.split('\n')[0].length -8);
+      zipname = f.split('\n')[0]
+      filename = zipname.substr(0, f.split('\n')[0].length -8);
 
-    JSZipUtils.getBinaryContent(file_names+'/'+zipname, function(err, data) {
+      JSZipUtils.getBinaryContent(file_names+'/'+zipname, function(err, data) {
 
-        if(err) {
-            throw err; // or handle err
-        }
+          if(err) {
+              throw err; // or handle err
+          }
 
-        zip = new JSZip(data);
+          zip = new JSZip(data);
 
-        $.get(tab_file, function(d){
-            //removing double quotes
-            d = d.replace(/['"]+/g, '')
-            zip.file(filename+'.mhp', d)
-            var content = zip.generate({type:"blob"});
-            saveAs(content, zipname);
-        });
+          $.get(tab_file, function(d){
+              //removing double quotes
+              d = d.replace(/['"]+/g, '')
+              zip.file(filename+'.mhp', d)
+              var content = zip.generate({type:"blob"});
+              saveAs(content, zipname);
+          });
 
-      });   
+        });   
     });
   }
 
