@@ -32,6 +32,7 @@ $(document).ready(function() {
         $("#convert_button").removeAttr("disabled");
         $("#step_2").css("opacity", 1);
         $("#step_3").css("opacity", 1);
+        // zipContents()
       }).fail(function(jqXHR){
         $("#step_2").css("opacity", 0.2);
         $("#step_3").css("opacity", 0.2);
@@ -51,6 +52,25 @@ $(document).ready(function() {
     $("#water_level").attr("disabled", "disabled");
     $("#errordiv").empty().append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
   }  
+      
+  //Javascript function using jszip.j / filesaver.js
+  //to package .zip output
+  function create_zip(data_file){
+    $.get(file_names, function(f){
+      var zip = new JSZip();
+      zipname = f.split('\n')[0]
+      filename = zipname.substr(0, f.split('\n')[0].length -8);
+        $.get(data_file, function(d){
+          //removing double quotes
+          d = d.replace(/['"]+/g, '').replace(/\//g, "$").replace(/\/n$a\:\w*$/,0); //this is ugly
+          zip.file(filename+'.mhp', d)
+          zip.generateAsync({type:"blob"})
+          .then(function(content) {
+              saveAs(content, zipname);
+          });
+      });
+    });   
+  }
 
   $("#convert_button").on("click", function(){
   
@@ -63,7 +83,6 @@ $(document).ready(function() {
           water_level : $('#water_level').val()
         }, function(session){
           //success
-
           create_zip(session)
         }).fail(function(jqXHR){
           //failure
@@ -88,6 +107,7 @@ $(document).ready(function() {
           throw err; // or handle err
         }
         zip = new JSZip(data);
+
          $.get(tab_file, function(d){
           //removing double quotes
           d = d.replace(/['"]+/g, '').replace(/\//g, "$").replace(/\/n$a\:\w*$/,0); //this is ugly
@@ -96,9 +116,10 @@ $(document).ready(function() {
           .then(function(content) {
               saveAs(content, zipname);
           });
-      });
-    });   
-  });
+        });
+
+      });   
+    });
   }
 
   $(document).ajaxStart(function() {
