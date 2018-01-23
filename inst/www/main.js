@@ -57,8 +57,24 @@ $(document).ready(function() {
       //////////////////////////////
       //Water level calculations
       //////////////////////////////
-      //disable the button to prevent multiple clicks
-      $("#convert_button").attr("disabled", "disabled");
+      var req = ocpu.call("mip_calc", {
+        mipfile : $("#mipfile")[0].files[0],
+        water_level : $('#water_level').val()
+      }, function(session){
+        //success
+        update_zipfile_input(session)
+      }).fail(function(jqXHR){
+         //failure
+         errormsg(jqXHR.responseText);
+        })
+  });
+      
+  $("#preview_button").on("click", function(){
+
+      //////////////////////////////
+      //Plot Preview
+      //////////////////////////////
+      $("#preview_button").attr("disabled", "disabled");
 
       //read the value for 'myname'
       var nfield = getRandomInt(1, 1000)
@@ -69,15 +85,6 @@ $(document).ready(function() {
           n : nfield,
           dist : distfield
       })
-
-  });
-      
-  $("#preview_button").on("click", function(){
-
-      //////////////////////////////
-      //Plot Preview
-      //////////////////////////////
-
   });
 
   //Javascript function using jszip.j / filesaver.js

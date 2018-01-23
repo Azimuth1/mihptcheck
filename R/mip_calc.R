@@ -1,6 +1,6 @@
 mip_calc <- function(mipfile, water_level, ...){
 
-     options(stringsAsFactors = FALSE)
+    options(stringsAsFactors = FALSE)
 
     mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
     mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t")
