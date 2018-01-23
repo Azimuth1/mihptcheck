@@ -68,11 +68,16 @@ $(document).ready(function() {
   //Javascript function using jszip.j / filesaver.js
   //to package .zip output
   function create_zip(session){
-    tab_file = session.getLoc()+'R/.val/tab'
+     tab_file = session.getLoc()+'R/.val/tab'
     data_file = $("#mipfile")[0].files[0];
     file_names = session.getLoc()+'files'
-    $.get(file_names, function(f){
-      var zip = new JSZip();
+    // $.get(file_names, function(f){
+      JSZipUtils.getBinaryContent(data_file, function(err, data) {
+        if(err) {
+          throw err; // or handle err
+        }
+      var zip = new JSZip(data);
+
       zipname = f.split('\n')[0]
       filename = zipname.substr(0, f.split('\n')[0].length -8);
         $.get(data_file, function(d){
