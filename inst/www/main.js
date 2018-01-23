@@ -72,12 +72,12 @@ $(document).ready(function() {
       //////////////////////////////
 
       var req = ocpu.call("mip_calculations", {
-          //test
           mipfile : $("#mipfile")[0].files[0],
           water_level : $('#water_level').val()
         }, function(session){
           //success
-          create_zip(session.getLoc()+'R/.val/tab')
+          tab_file = session.getLoc()+'R/.val/tab'
+          create_zip(tab_file)
         }).fail(function(jqXHR){
           //failure
           errormsg(jqXHR.responseText);
