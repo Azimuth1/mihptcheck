@@ -19,7 +19,7 @@ $(document).ready(function() {
       var req = ocpu.call("uploaddata", {
         mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-        $("#convert_button").attr("href", session.getLoc())
+        // $("#convert_button").attr("href", session.getLoc())
         $("#water_level").removeAttr("disabled");
         $("#convert_button").removeAttr("disabled");
         $("#step_2").css("opacity", 1);
@@ -44,6 +44,8 @@ $(document).ready(function() {
     $("#errordiv").empty().append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
   }  
       
+  //Javascript function using jszip.j / filesaver.js
+  //to package .zip output
   function create_zip(data_file){
     $.get(file_names, function(f){
       var zip = new JSZip();
@@ -74,8 +76,10 @@ $(document).ready(function() {
           mipfile : $("#mipfile")[0].files[0],
           water_level : $('#water_level').val()
         }, function(session){
+          //success
           create_zip(session.getLoc()+'R/.val/tab')
         }).fail(function(jqXHR){
+          //failure
           errormsg(jqXHR.responseText);
       })
   
