@@ -1,10 +1,13 @@
 mip_calc <- function(mipfile, water_level, ...){
 
     # checking pushes
-    options(stringsAsFactors = FALSE)
+    # options(stringsAsFactors = FALSE)
 
     # #list files inside zip directory
-    fns <- unzip(mipfile, junkpaths = TRUE, exdir = tempdir())
+    # fns <- unzip(mipfile, junkpaths = TRUE, exdir = tempdir())
+
+    # mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
+    # mip_file_data <- read.table(fns[1], header=T, quote="\"", sep="\t")
 
     mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
     mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t")
@@ -42,15 +45,17 @@ mip_calc <- function(mipfile, water_level, ...){
                     "HPT Line Press. Min (kPa)",
                     "HPT Line Press. Avg (kPa)",
                     "HPT Line Press. Max (kPa)",
-                    "HPT Screen Depth (ft)",
-                    "Water Level (ft)")
+                    "HPT Screen Depth (ft)")
 
     colnames(mip_file_data) <- col_names
 
-    mip_file_data[ mip_file_data == 'n/a' ] <- NA
-    mip_file_data <- sapply(mip_file_data, as.numeric)
-    mip_file_data$'Water Level (ft)' <- water_level
-    mip_file_data$test <- 0
+    # mip_file_data[ mip_file_data == 'n/a' ] <- NA
+    # mip_file_data <- sapply(mip_file_data, as.numeric)
+    mip_file_data$["Water Level (ft)"] <- water_level
+
+    # write.table(mip_file_data, fns[1], append = FALSE, sep = " ", dec = ".",
+    #         row.names = TRUE, col.names = TRUE)
+
     return(mip_file_data)
 
 }
