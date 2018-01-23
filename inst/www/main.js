@@ -43,10 +43,35 @@ $(document).ready(function() {
     $("#water_level").attr("disabled", "disabled");
     $("#errordiv").empty().append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
   }  
+
+  $("#convert_button").on("click", function(){
+  
+      //////////////////////////////
+      //Water level calculations
+      //////////////////////////////
+
+      file_names = $(this).attr('href')+'files'
+
+      var req = ocpu.call("mip_calc", {
+          mipfile : $("#mipfile")[0].files[0],
+          water_level : $('#water_level').val()
+        }, function(session){
+          //success
+
+          create_zip(session)
+        }).fail(function(jqXHR){
+          //failure
+          errormsg(jqXHR.responseText);
+      })
+  
+  
+  });
       
   //Javascript function using jszip.j / filesaver.js
   //to package .zip output
-  function create_zip(data_file){
+  function create_zip(session){
+    tab_file = session.getLoc()+'R/.val/tab'
+    data_file = $("#mipfile")[0].files[0];
     $.get(file_names, function(f){
       var zip = new JSZip();
       zipname = f.split('\n')[0]
@@ -63,29 +88,6 @@ $(document).ready(function() {
     });   
   }
 
-  $("#convert_button").on("click", function(){
-  
-      //////////////////////////////
-      //Water level calculations
-      //////////////////////////////
-
-      file_names = $(this).attr('href')+'files'
-
-      var req = ocpu.call("mip_calc", {
-          mipfile : $("#mipfile")[0].files[0],
-          water_level : $('#water_level').val()
-        }, function(session){
-          //success
-          tab_file = session.getLoc()+'R/.val/tab'
-          create_zip(tab_file)
-        }).fail(function(jqXHR){
-          //failure
-          errormsg(jqXHR.responseText);
-      })
-  
-  
-  });
-      
   $(document).ajaxStart(function() {
     $(".progress").show();
   }); 
