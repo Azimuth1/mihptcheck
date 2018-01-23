@@ -87,11 +87,8 @@ $(document).ready(function() {
         if(err) {
           throw err; // or handle err
         }
-      var zip = new JSZip(data);
-
-      zipname = f.split('\n')[0]
-      filename = zipname.substr(0, f.split('\n')[0].length -8);
-        $.get(data_file, function(d){
+        zip = new JSZip(data);
+         $.get(tab_file, function(d){
           //removing double quotes
           d = d.replace(/['"]+/g, '').replace(/\//g, "$").replace(/\/n$a\:\w*$/,0); //this is ugly
           zip.file(filename+'.mhp', d)
