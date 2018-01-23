@@ -50,8 +50,6 @@ $(document).ready(function() {
       //Water level calculations
       //////////////////////////////
 
-      file_names = $(this).attr('href')+'files'
-
       var req = ocpu.call("mip_calc", {
           mipfile : $("#mipfile")[0].files[0],
           water_level : $('#water_level').val()
@@ -72,6 +70,7 @@ $(document).ready(function() {
   function create_zip(session){
     tab_file = session.getLoc()+'R/.val/tab'
     data_file = $("#mipfile")[0].files[0];
+    file_names = session.getLoc()+'files'
     $.get(file_names, function(f){
       var zip = new JSZip();
       zipname = f.split('\n')[0]
