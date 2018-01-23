@@ -107,15 +107,12 @@ $(document).ready(function() {
           throw err; // or handle err
         }
         zip = new JSZip(data);
-
          $.get(tab_file, function(d){
           //removing double quotes
           d = d.replace(/['"]+/g, '').replace(/\//g, "$").replace(/\/n$a\:\w*$/,0); //this is ugly
           zip.file(filename+'.mhp', d)
-          zip.generateAsync({type:"blob"})
-          .then(function(content) {
-              saveAs(content, zipname);
-          });
+          var content = zip.generate({type:"blob"});
+          saveAs(content, zipname);
         });
 
       });   
