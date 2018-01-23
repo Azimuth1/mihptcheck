@@ -50,7 +50,7 @@
 
   #project_space{
     font-family: 'Source Sans Pro', sans-serif;
-    margin: 50px;
+    margin: 20px;
   }
 
   #project_title{
@@ -92,17 +92,23 @@
     align-items: center;
     }
 
-.flex-item:nth-child(1) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: stretch;
+  .flex-item:nth-child(1) {
+      order: 0;
+      flex: 0 1 auto;
+      align-self: stretch;
     }
 
-.flex-item:nth-child(2) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: center;
+  .flex-item:nth-child(2) {
+      order: 0;
+      flex: 0 1 auto;
+      align-self: center;
     }
+
+    #plotdiv {
+        width: 500px;
+        height: 385px;
+        margin: 20px;
+      }
 
 </style>
 
@@ -131,6 +137,7 @@
             <div class="form-group">
               <label>Water level (ft)</label> 
               <input class="input-medium" id="water_level" type="number" id="max" step="0.05" min="0" max="100" value="10" />
+              <button id="preview_button" type="button" class="btn btn-primary" disabled="disabled">Plot Preview</button>
             </div>
           </fieldset>
             <fieldset id="step_3">
@@ -147,7 +154,7 @@
           </div>
         </div>  
       </div>
-      <div id="plotdiv" class="flex-item"></div>      
+      <div id="plotdiv" class="flex-item well"></div>      
     </div>
   </div>
 </div>
