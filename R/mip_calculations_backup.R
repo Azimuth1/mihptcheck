@@ -1,4 +1,4 @@
-mip_calculations <- function(mipfile, ...){
+mip_calculations_backup <- function(mipfile, ...){
 
     mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
     mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t")
