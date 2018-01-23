@@ -48,25 +48,38 @@ $(document).ready(function() {
       $("#errordiv").empty().append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
   }  
 
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
   $("#convert_button").on("click", function(){
   
       //////////////////////////////
       //Water level calculations
       //////////////////////////////
+      //disable the button to prevent multiple clicks
+      $("#convert_button").attr("disabled", "disabled");
 
-      var req = ocpu.call("mip_calc", {
-          mipfile : $("#mipfile")[0].files[0],
-          water_level : $('#water_level').val()
-        }, function(session){
-          //success
-          update_zipfile_input(session)
-        }).fail(function(jqXHR){
-          //failure
-          errormsg(jqXHR.responseText);
+      //read the value for 'myname'
+      var nfield = getRandomInt(1, 1000)
+      var distfield = getRandomInt(1, 10)
+
+      //create the plot area on the plotdiv element
+      var req = $("#plotdiv").rplot("randomplot", {
+          n : nfield,
+          dist : distfield
       })
 
   });
       
+  $("#preview_button").on("click", function(){
+
+      //////////////////////////////
+      //Plot Preview
+      //////////////////////////////
+
+  });
+
   //Javascript function using jszip.j / filesaver.js
   //to package .zip output
   function update_zipfile_input(session){
@@ -84,11 +97,9 @@ $(document).ready(function() {
       zipname = f.split('\n')[0]
       filename = zipname.substr(0, f.split('\n')[0].length -8);
 
-      JSZipUtils.getBinaryContent(file_names+'/'+zipname, function(err, data) {
+      JSZipUtils.getBinaryContent(file_names + '/' + zipname, function(err, data) {
 
-          if(err) {
-              throw err; // or handle err
-          }
+          if(err) {throw err;}// or handle err
 
           zip = new JSZip(data);
 
