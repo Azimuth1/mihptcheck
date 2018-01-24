@@ -53,7 +53,8 @@ mip_data_plot <- function(mipfile, water_level){
 
   colnames(data) <- col_names
 
-  waterlevels <- as.numeric(water_level)
+  waterlevels<-NULL
+  # water_level <- as.numeric(water_level)
 
   chop<-function(x,d){
       tail(head(x,-d),-d)
@@ -76,7 +77,7 @@ mip_data_plot <- function(mipfile, water_level){
   abline(v = 0:100, lty = 2, col = 'lightgrey')))
   abline(min(p),0,col="green")
 
-  intcpt<-min(p-p_grad*d)
+  intcpt<-as.numeric(water_level)
   p_0<-(p-p_grad*d)
   diff<-min(p)-min(p_0)
 
