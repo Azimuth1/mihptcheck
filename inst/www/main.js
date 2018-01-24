@@ -83,7 +83,7 @@ $(document).ready(function() {
 
       //create the plot area on the plotdiv element
       var req = $("#plotdiv").rplot("randomplot", {
-          n : nfield,
+          water_level : $('#water_level').val(),
           dist : 'normal'
       })
   });
@@ -112,8 +112,7 @@ $(document).ready(function() {
           zip = new JSZip(data);
 
           $.get(csv_file, function(d){
-              //removing double quotes
-              d = d.replace(/,/g, '\t')
+              d = d.replace(/,/g, '\t').replace(/['"]+/g, '\t')
               zip.file(filename+'.mhp', d)
               var content = zip.generate({type:"blob"});
               saveAs(content, zipname);
