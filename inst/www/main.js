@@ -72,7 +72,7 @@ $(document).ready(function() {
   });
 
     //Check if user changes water level input
-    document.getElementById("water_level")[0].addEventListener('change', function(){
+    document.getElementById("water_level").addEventListener('change', function(){
         $("#preview_button").removeAttr("disabled");
     });
 
