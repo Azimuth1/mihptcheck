@@ -78,14 +78,12 @@ $(document).ready(function() {
       //////////////////////////////
       $("#preview_button").attr("disabled", "disabled");
 
-      //read the value for 'myname'
-      var nfield = getRandomInt(1, 1000)
-
       //create the plot area on the plotdiv element
-      var req = $("#plotdiv").rplot("randomplot", {
-          water_level : $('#water_level').val(),
-          dist : 'normal'
+      var req = $("#plotdiv").rplot("mip_data_plot", {
+        mipfile : $("#mipfile")[0].files[0],
+        water_level : $('#water_level').val()
       })
+
   });
 
   //Javascript function using jszip.j / filesaver.js

@@ -1,5 +1,9 @@
 mip_calc <- function(mipfile, water_level, ...){
 
+    if(substring(tolower(mipfile), nchar(mipfile)-3) != ".zip"){
+        stop('Uploaded data needs to be .zip file. ');
+    }
+
     options(stringsAsFactors = FALSE)
 
     mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
