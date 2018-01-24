@@ -14,7 +14,7 @@ mip_data_plot <- function(mipfile, water_level){
   options(stringsAsFactors = FALSE)
 
   mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
-  mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
+  data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
 
   col_names <- c( "Depth (ft)",	
                   "EC (mS/m)",	
@@ -51,50 +51,50 @@ mip_data_plot <- function(mipfile, water_level){
                   "HPT Line Press. Max (kPa)",
                   "HPT Screen Depth (ft)")
 
-  colnames(mip_file_data) <- col_names
-  data <- mip_file_data
-  waterlevels<-NULL
-  water_level <- as.numeric(water_level)
+  colnames(data) <- col_names
 
-    chop<-function(x,d){
-        tail(head(x,-d),-d)
-    }
+  waterlevels <- as.numeric(water_level)
 
-    chopmiddle<-function(x,d){
-        tail(head(x,length(x)/2),length(x)*0.4)
-    }
-    d<-as.numeric(chopmiddle(data[,1],20))
-    p<-chopmiddle(data[,21],20)
+  chop<-function(x,d){
+      tail(head(x,-d),-d)
+  }
 
-    p_grad <- 0.44
+  chopmiddle<-function(x,d){
+      tail(head(x,length(x)/2),length(x)*0.4)
+  }
+  d<-as.numeric(chopmiddle(data[,1],20))
+  p<-chopmiddle(data[,21],20)
 
-    plot(d,p,
-    type='l',
-    col='black',
-    xlab="Depth (ft)",
-    ylab="Pressure (PSI)", 
-    panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
-    abline(v = 0:100, lty = 2, col = 'lightgrey')))
-    abline(min(p),0,col="green")
+  p_grad <- 0.44
 
-    intcpt<-min(p-p_grad*d)
-    p_0<-(p-p_grad*d)
-    diff<-min(p)-min(p_0)
+  plot(d,p,
+  type='l',
+  col='black',
+  xlab="Depth (ft)",
+  ylab="Pressure (PSI)", 
+  panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
+  abline(v = 0:100, lty = 2, col = 'lightgrey')))
+  abline(min(p),0,col="green")
 
-    abline(intcpt,p_grad,col="blue")
+  intcpt<-min(p-p_grad*d)
+  p_0<-(p-p_grad*d)
+  diff<-min(p)-min(p_0)
 
-    p_c<-p_0+diff
-    p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
-    lines(d,p_c,col="red")
-    legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Press.","HPT Pressure","Hydrostatic Press.", "Pressure Baseline", "Est K."))
-    wlevel<-(min(p)-intcpt)/p_grad
-    points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
-    text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)  
-    waterlevels<-rbind(waterlevels,wlevel)
-    EstK<-21.14*log10(chopmiddle(data[,23],20)/p_c)
-    par(new=TRUE)
-    plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="")
-    axis(4)
-    mtext("EstK (ft/day)",side=4,line=3)
+  abline(intcpt,p_grad,col="blue")
+
+  p_c<-p_0+diff
+  p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
+  lines(d,p_c,col="red")
+  legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Press.","HPT Pressure","Hydrostatic Press.", "Pressure Baseline", "Est K."))
+  wlevel<-(min(p)-intcpt)/p_grad
+  points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
+  text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)  
+  waterlevels<-rbind(waterlevels,wlevel)
+  EstK<-21.14*log10(chopmiddle(data[,23],20)/p_c)
+  par(new=TRUE)
+  plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="")
+  axis(4)
+  mtext("EstK (ft/day)",side=4,line=3)
+
   invisible();  
 }
