@@ -52,7 +52,8 @@ mip_data_plot <- function(mipfile, water_level){
                   "HPT Screen Depth (ft)")
 
   colnames(mip_file_data) <- col_names
-waterlevels<-NULL
+  data <- mip_file_data
+  waterlevels<-NULL
   water_level <- as.numeric(water_level)
 
     chop<-function(x,d){
