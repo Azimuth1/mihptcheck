@@ -47,12 +47,19 @@
     opacity: 0.2;
   }
 
-  #project_space{
+  #user_input_panel{
     font-family: 'Source Sans Pro', sans-serif;
     margin-left: 20px;
     height: 500px;
     margin-bottom: 0px !important;
   }
+
+  #plotdiv {
+        width: 500px;
+        height: 500px;
+        margin-left: 20px;
+        margin-bottom: 0px !important;
+      }
 
   #project_title{
     font-size: 30px;
@@ -104,13 +111,6 @@
       align-self: center;
     }
 
-    #plotdiv {
-        width: 500px;
-        height: 385px;
-        margin-left: 20px;
-        margin-bottom: 0px !important;
-      }
-
     .custom_legend{
       font-size: 14px;
     }
@@ -125,7 +125,7 @@
   </h1>
   <div>
     <div class="flex-container">
-      <div id="project_space" class="flex-item well">
+      <div id="user_input_panel" class="flex-item well">
         <div id="project_title">MIP Data Converter</div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
