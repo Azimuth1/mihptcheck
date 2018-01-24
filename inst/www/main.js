@@ -76,7 +76,6 @@ $(document).ready(function() {
       //////////////////////////////
       //Plot Preview
       //////////////////////////////
-      $("#preview_button").attr("disabled", "disabled");
 
       //create the plot area on the plotdiv element
       var req = $("#plotdiv").rplot("mip_data_plot", {
@@ -85,8 +84,10 @@ $(document).ready(function() {
       }, function(session){
         //configure inputs on/off
         //success
+        $("#preview_button").attr("disabled", "disabled");
       }).fail(function(jqXHR){
         //failure
+        $("#preview_button").removeAttr("disabled");
         errormsg(jqXHR.responseText);
        })
     

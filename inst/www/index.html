@@ -110,6 +110,9 @@
         margin-bottom: 0px !important;
       }
 
+    .custom_legend{
+      font-size: 14px;
+    }
 </style>
 
 </head>
@@ -125,7 +128,7 @@
         <div id="project_title">MIP Data Converter</div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
-            <legend>(1) Load MIP data (.zip containing .mhp)</legend>
+            <legend class="custom_legend">(1) Load MIP data (.zip containing .mhp)</legend>
             
               <div class="form-group">
                  <input type="file" id="mipfile">
@@ -133,7 +136,7 @@
               
           </fieldset>         
           <fieldset id="step_2">
-            <legend>(2) Adjust Water Depth</legend>
+            <legend class="custom_legend">(2) Adjust Water Depth</legend>
             <div class="form-group">
               <label>Water level (ft)</label> 
               <input class="input-medium" id="water_level" type="number" id="max" step="0.05" min="0" max="100" value="10" />
@@ -141,7 +144,7 @@
             </div>
           </fieldset>
             <fieldset id="step_3">
-              <legend>(3) Download Converted File</legend>
+              <legend class="custom_legend">(3) Download Converted File</legend>
               <button id="convert_button" type="button" class="btn btn-primary" disabled="disabled">Do it</button>
             </fieldset>
         </form> 
