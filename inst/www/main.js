@@ -96,7 +96,7 @@ $(document).ready(function() {
       //Update .zipfile
       //////////////////////////////
 
-      tab_file = session.getLoc()+'R/.val/tab'
+      csv_file = session.getLoc()+'R/.val/csv'
       data_file = $("#mipfile")[0].files[0];
       file_names = session.getLoc()+'files'
 
@@ -111,9 +111,9 @@ $(document).ready(function() {
 
           zip = new JSZip(data);
 
-          $.get(tab_file, function(d){
+          $.get(csv_file, function(d){
               //removing double quotes
-              d = d.replace(/['"]+/g, '').replace(/\s+/g, '\t')
+              d = d.replace(/,/g, '\t')
               zip.file(filename+'.mhp', d)
               var content = zip.generate({type:"blob"});
               saveAs(content, zipname);
