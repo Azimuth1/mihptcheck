@@ -5,7 +5,7 @@
 #' @export
 #' @param water_level 
 #' @param mip_file 
-mip_data_plot <- function(mip_file, water_level){
+mip_data_plot <- function(mipfile, water_level){
 
   if(substring(tolower(mipfile), nchar(mipfile)-3) != ".zip"){
     stop('Uploaded data needs to be .zip file. ');
