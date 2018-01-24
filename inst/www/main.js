@@ -70,7 +70,13 @@ $(document).ready(function() {
          errormsg(jqXHR.responseText);
         })
   });
-      
+
+    //Check if user changes water level input
+    document.getElementById("water_level")[0].addEventListener('change', function(){
+        $("#preview_button").removeAttr("disabled");
+    });
+
+
   $("#preview_button").on("click", function(){
 
       //////////////////////////////
