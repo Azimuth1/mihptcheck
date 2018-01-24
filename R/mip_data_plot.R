@@ -14,7 +14,7 @@ mip_data_plot <- function(mipfile, water_level){
   options(stringsAsFactors = FALSE)
 
   mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
-  mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t")
+  mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
 
   col_names <- c( "Depth (ft)",	
                   "EC (mS/m)",	
@@ -52,15 +52,44 @@ mip_data_plot <- function(mipfile, water_level){
                   "HPT Screen Depth (ft)")
 
   colnames(mip_file_data) <- col_names
-
-
+waterlevels<-NULL
   water_level <- as.numeric(water_level)
 
-  p_grad <- 0.44
+    chop<-function(x,d){
+        tail(head(x,-d),-d)
+    }
 
-  mip_file_data$'Water Level (ft)' <- water_level
+    chopmiddle<-function(x,d){
+        tail(head(x,length(x)/2),length(x)*0.4)
+    }
+    d<-as.numeric(chopmiddle(data[,1],20))
+    p<-chopmiddle(data[,21],20)
 
-  plot(mip_file_data$"Depth (ft)", mip_file_data$"HPT Screen Depth (ft)")
+    p_grad <- 0.44
 
+    mip_file_data$'Water Level (ft)' <- water_level
+
+    plot(d,p,type='l',col='black',xlab="Depth (ft)",ylab="Pressure (PSI)",main=file, panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey') ,abline(v = 0:100, lty = 2, col = 'lightgrey')))
+    abline(min(p),0,col="green")
+
+    intcpt<-min(p-p_grad*d)
+    p_0<-(p-p_grad*d)
+    diff<-min(p)-min(p_0)
+
+    abline(intcpt,p_grad,col="blue")
+
+    p_c<-p_0+diff
+    p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
+    lines(d,p_c,col="red")
+    legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Press.","HPT Pressure","Hydrostatic Press.", "Pressure Baseline", "Est K."))
+    wlevel<-(min(p)-intcpt)/p_grad
+    points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
+    text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)  
+    waterlevels<-rbind(waterlevels,wlevel)
+    EstK<-21.14*log10(chopmiddle(data[,23],20)/p_c)
+    par(new=TRUE)
+    plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="",main=file)
+    axis(4)
+    mtext("EstK (ft/day)",side=4,line=3)
   invisible();  
 }

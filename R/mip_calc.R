@@ -7,7 +7,7 @@ mip_calc <- function(mipfile, water_level, ...){
     options(stringsAsFactors = FALSE)
 
     mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
-    mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t")
+    mip_file_data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
 
     col_names <- c( "Depth (ft)",	
                     "EC (mS/m)",	
@@ -45,10 +45,6 @@ mip_calc <- function(mipfile, water_level, ...){
                     "HPT Screen Depth (ft)")
 
     colnames(mip_file_data) <- col_names
-
-    p_grad <- 0.44
-
-    mip_file_data$'Water Level (ft)' <- water_level
 
     return(mip_file_data)
 
