@@ -68,7 +68,7 @@ mip_data_plot <- function(mipfile, water_level){
 
     p_grad <- 0.44
 
-    plot(d,p,type='l',col='black',xlab="Depth (ft)",ylab="Pressure (PSI)",main=mipfile, panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey') ,abline(v = 0:100, lty = 2, col = 'lightgrey')))
+    plot(d,p,type='l',col='black',xlab="Depth (ft)",ylab="Pressure (PSI)", panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey') ,abline(v = 0:100, lty = 2, col = 'lightgrey')))
     abline(min(p),0,col="green")
 
     intcpt<-min(p-p_grad*d)
