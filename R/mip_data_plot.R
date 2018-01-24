@@ -68,7 +68,13 @@ mip_data_plot <- function(mipfile, water_level){
 
     p_grad <- 0.44
 
-    plot(d,p,type='l',col='black',xlab="Depth (ft)",ylab="Pressure (PSI)", panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey') ,abline(v = 0:100, lty = 2, col = 'lightgrey')))
+    plot(d,p,
+    type='l',
+    col='black',
+    xlab="Depth (ft)",
+    ylab="Pressure (PSI)", 
+    panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
+    abline(v = 0:100, lty = 2, col = 'lightgrey')))
     abline(min(p),0,col="green")
 
     intcpt<-min(p-p_grad*d)
@@ -77,9 +83,9 @@ mip_data_plot <- function(mipfile, water_level){
 
     abline(intcpt,p_grad,col="blue")
 
-    # p_c<-p_0+diff
-    # p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
-    # lines(d,p_c,col="red")
+    p_c<-p_0+diff
+    p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
+    lines(d,p_c,col="red")
     # legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Press.","HPT Pressure","Hydrostatic Press.", "Pressure Baseline", "Est K."))
     # wlevel<-(min(p)-intcpt)/p_grad
     # points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
