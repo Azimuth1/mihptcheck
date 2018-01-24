@@ -3,7 +3,8 @@
 #' This function creates a random histogram plot.
 #' 
 #' @export
-#' @param water_level one of "normal" or "uniform".
+#' @param water_level 
+#' @param mip_file 
 mip_data_plot <- function(mip_file, water_level){
 
   if(substring(tolower(mipfile), nchar(mipfile)-3) != ".zip"){

@@ -82,8 +82,14 @@ $(document).ready(function() {
       var req = $("#plotdiv").rplot("mip_data_plot", {
         mipfile : $("#mipfile")[0].files[0],
         water_level : $('#water_level').val()
-      })
-
+      }, function(session){
+        //configure inputs on/off
+        //success
+      }).fail(function(jqXHR){
+        //failure
+        errormsg(jqXHR.responseText);
+       })
+    
   });
 
   //Javascript function using jszip.j / filesaver.js
