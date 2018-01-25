@@ -74,14 +74,21 @@ mip_data_plot <- function(mipfile, water_level){
                        abline(v = 0:100, lty = 2, col = 'lightgrey')))
   abline(min(p),0,col="green")
 
-  intcpt<-as.numeric(water_level)
-  p_0<-(p-p_grad*d)
-  diff<-min(p)-min(p_0)
 
-  abline(intcpt,p_grad,col="blue")
+  p_c<-p
+  p_c[which(d>water_level)]<-p[which(d>water_level)]+(d-water_level)*p_grad
 
-  p_c<-p_0+diff
-  p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
+
+
+
+  #intcpt<-as.numeric(water_level)
+  #p_0<-(p-p_grad*d)
+  #diff<-min(p)-min(p_0)
+
+  #abline(intcpt,p_grad,col="blue")
+
+  #p_c<-p_0+diff
+  #p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
   lines(d,p_c,col="red")
   legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Pressure","HPT Pressure","Hydrostatic Press.", "Baseline Pressure", "Est K."))
   wlevel<-(min(p)-intcpt)/p_grad
