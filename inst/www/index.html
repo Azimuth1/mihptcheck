@@ -140,7 +140,7 @@ function update_zipfile_input(session){
     $.get(file_names, function(f){
 
       zipname = f.split('\n')[0]
-      filename = zipname.substr(0, f.split('\n')[0].length -4);
+      filename = zipname.substr(0, f.split('\n')[0].length - 8);
 
       JSZipUtils.getBinaryContent(file_names + '/' + zipname, function(err, data) {
 
