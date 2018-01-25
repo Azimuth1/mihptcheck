@@ -97,7 +97,7 @@ mip_data_plot <- function(mipfile, water_level){
   #points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
   #text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)
   #waterlevels<-rbind(waterlevels,wlevel)
-  EstK<-21.14*log10(data[,"HPT Flow Avg (mL/min)"]/p_c)
+  EstK<-0.00745*log10(data[,"HPT Flow Avg (mL/min)"]/p_c)  #cm/sec
   par(new=TRUE)
   plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="Est. K")
   axis(4)
