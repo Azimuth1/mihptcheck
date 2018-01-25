@@ -62,7 +62,7 @@ $(document).ready(function() {
       var req = ocpu.call("mip_data_plot", {
         mipfile : $("#mipfile")[0].files[0],
         water_level : $('#water_level').val(),
-        plotting = 'FALSE'
+        plotting : 'FALSE'
       }, function(session){
         //success
         update_zipfile_input(session)
