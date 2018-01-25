@@ -83,12 +83,12 @@ mip_data_plot <- function(mipfile, water_level){
   p_c<-p_0+diff
   p_c[which(d*p_grad+intcpt < min(p))]<-p[which(d*p_grad+intcpt < min(p))]
   lines(d,p_c,col="red")
-  legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Press.","HPT Pressure","Hydrostatic Press.", "Pressure Baseline", "Est K."))
+  legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Pressure","HPT Pressure","Hydrostatic Press.", "Baseline Pressure", "Est K."))
   wlevel<-(min(p)-intcpt)/p_grad
   points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
   text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)
   waterlevels<-rbind(waterlevels,wlevel)
-  EstK<-21.14*log10(chopmiddle(data[,23],20)/p_c)
+  EstK<-21.14*log10(chopmiddle(data[,"HPT Flow Avg (mL/min)"],20)/p_c)
   par(new=TRUE)
   plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="")
   axis(4)
