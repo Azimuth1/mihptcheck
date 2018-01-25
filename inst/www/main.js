@@ -59,9 +59,10 @@ $(document).ready(function() {
       //////////////////////////////
       //Water level calculations
       //////////////////////////////
-      var req = ocpu.call("mip_calc", {
+      var req = ocpu.call("mip_data_plot", {
         mipfile : $("#mipfile")[0].files[0],
-        water_level : $('#water_level').val()
+        water_level : $('#water_level').val(),
+        plotting = 'FALSE'
       }, function(session){
         //success
         update_zipfile_input(session)
@@ -86,7 +87,8 @@ $(document).ready(function() {
       //create the plot area on the plotdiv element
       var req = $("#plotdiv").rplot("mip_data_plot", {
         mipfile : $("#mipfile")[0].files[0],
-        water_level : $('#water_level').val()
+        water_level : $('#water_level').val(),
+        plotting: 'TRUE'
       }, function(session){
         //configure inputs on/off
         //success
