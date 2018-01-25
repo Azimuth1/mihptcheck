@@ -71,11 +71,10 @@ mip_data_plot <- function(mipfile, water_level){
        col='black',
        xlab="Depth (ft)",
        ylab="Pressure (PSI)",
-       ylim=c(0,40),
-       panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
-                       abline(v = 0:100, lty = 2, col = 'lightgrey')))
+       ylim=c(0,40)
+       )
   #abline(min(p),0,col="green")
-grid()
+  grid()
 
   p_c<-p
   p_c[which(d>water_level)]<-p[which(d>water_level)]-(d-water_level)*p_grad
