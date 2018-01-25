@@ -60,9 +60,10 @@ mip_data_plot <- function(mipfile, water_level){
   chopmiddle<-function(x,d){
     tail(head(x,length(x)/2),length(x)*0.4)
   }
-  d<-as.numeric(chopmiddle(data[,"Depth (ft)"],20))
-  p<-chopmiddle(data[,"HPT Press. Avg (psi)"],20)
-
+  #d<-as.numeric(chopmiddle(data[,"Depth (ft)"],20))
+  #p<-chopmiddle(data[,"HPT Press. Avg (psi)"],20)
+  d<-as.numeric(data[,"Depth (ft)"])
+  p<-as.numeric(data[,"HPT Press. Avg (psi)"])
   p_grad <- 0.44
 
   plot(d,p,
@@ -96,7 +97,7 @@ mip_data_plot <- function(mipfile, water_level){
   #points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
   #text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)
   #waterlevels<-rbind(waterlevels,wlevel)
-  EstK<-21.14*log10(chopmiddle(data[,"HPT Flow Avg (mL/min)"],20)/p_c)
+  EstK<-21.14*log10(data[,"HPT Flow Avg (mL/min)"]/p_c)
   par(new=TRUE)
   plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="")
   axis(4)
