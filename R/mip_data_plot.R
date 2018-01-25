@@ -51,7 +51,7 @@ mip_data_plot <- function(mipfile, water_level){
   colnames(data) <- col_names
 
   waterlevels<-NULL
-  # water_level <- as.numeric(water_level)
+  water_level <- as.numeric(water_level)
 
   chop<-function(x,d){
     tail(head(x,-d),-d)
