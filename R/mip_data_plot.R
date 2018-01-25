@@ -70,6 +70,7 @@ mip_data_plot <- function(mipfile, water_level){
        col='black',
        xlab="Depth (ft)",
        ylab="Pressure (PSI)",
+       ylim=(0,40),
        panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
                        abline(v = 0:100, lty = 2, col = 'lightgrey')))
   abline(min(p),0,col="green")
