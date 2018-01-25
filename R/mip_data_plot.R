@@ -101,7 +101,7 @@ mip_data_plot <- function(mipfile, water_level){
   par(new=TRUE)
   plot(d,EstK,axes=F,type="l",col="orange",xlab="",ylab="")
   axis(4)
-  mtext("EstK (ft/day)",side=4,line=-1.5)
+  mtext("EstK (cm/sec)",side=4,line=-1.5)
 
   invisible();
 }
