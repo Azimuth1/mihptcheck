@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OpenCPU MIP Analysis</title>
+<title>MIHPT Log QA and Analysis</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -63,7 +63,7 @@
 
   #project_title{
     font-size: 30px;
-    padding-bottom: 15px;    
+    padding-bottom: 15px;
     border-bottom: 1px solid #000000;
   }
 
@@ -86,9 +86,9 @@
   #mipfile {
     max-width: 250px;
   }
-  
+
   .progress{
-      display: none;  
+      display: none;
   }
 
   .flex-container {
@@ -121,25 +121,25 @@
 <body>
 <div id="azimuth_container">
   <h1 align ="center">
-      <img id="logo" src="images/icon.png">
+      <img id="logo" src="images/icon.png" width=50% height="50%">
   </h1>
   <div>
     <div class="flex-container">
       <div id="user_input_panel" class="flex-item well">
-        <div id="project_title">MIP Data Converter</div>
+        <div id="project_title">MIHPT Log QA</div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
-            <legend class="custom_legend">(1) Load MIP data (.zip containing .mhp)</legend>
-            
+            <legend class="custom_legend">(1) Load MIHPT data (.zip containing .mhp)</legend>
+
               <div class="form-group">
                  <input type="file" id="mipfile">
               </div>
-              
-          </fieldset>         
+
+          </fieldset>
           <fieldset id="step_2">
-            <legend class="custom_legend">(2) Adjust Water Depth</legend>
+            <legend class="custom_legend">(2) Adjust Water Depth to add Corrected Pressure and Est K.</legend>
             <div class="form-group">
-              <label>Water level (ft)</label> 
+              <label>Depth to Water (ft)</label>
               <input class="input-medium" id="water_level" type="number" id="max" step="0.05" min="0" max="100" value="10" />
               <button id="preview_button" type="button" class="btn btn-primary btn-sm" disabled="disabled">Plot Preview</button>
             </div>
@@ -149,17 +149,17 @@
             <br>
               <button id="convert_button" type="button" class="btn btn-primary" disabled="disabled">Do it</button>
             </fieldset>
-        </form> 
+        </form>
               <!-- R Relayed Message and Progress Information -->
       <div id="azimuth_warning">
         <div id="successdiv"></div>
-        <div id="errordiv"></div>      
+        <div id="errordiv"></div>
         <div class="progress progress-striped active">
           <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
-      </div> 
       </div>
-      <div id="plotdiv" class="flex-item well"></div>      
+      </div>
+      <div id="plotdiv" class="flex-item well"></div>
     </div>
 
   </div>

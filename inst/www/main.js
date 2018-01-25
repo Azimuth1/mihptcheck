@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
   $("#convert_button").attr("disabled", "disabled");
   $("#preview_button").attr("disabled", "disabled");
   $("#water_level").attr("disabled", "disabled");
@@ -37,7 +37,7 @@ $(document).ready(function() {
         })
       }
   });
-  
+
   //R output to popup
   function successmsg(text){
       $("#successdiv").empty().append('<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
@@ -48,14 +48,14 @@ $(document).ready(function() {
       $("#convert_button").attr("disabled", "disabled");
       $("#water_level").attr("disabled", "disabled");
       $("#errordiv").empty().append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
-  }  
+  }
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
   $("#convert_button").on("click", function(){
-  
+
       //////////////////////////////
       //Water level calculations
       //////////////////////////////
@@ -96,7 +96,7 @@ $(document).ready(function() {
         $("#preview_button").removeAttr("disabled");
         errormsg(jqXHR.responseText);
        })
-    
+
   });
 
   //Javascript function using jszip.j / filesaver.js
@@ -129,16 +129,16 @@ $(document).ready(function() {
               saveAs(content, zipname);
           });
 
-        });   
+        });
     });
   }
 
   $(document).ajaxStart(function() {
     $(".progress").show();
-  }); 
-  
+  });
+
   $(document).ajaxStop(function() {
     $(".progress").hide();
   });
-  
+
 });

@@ -1,6 +1,3 @@
-#' Make a random plot
-#'
-#' This function creates a random histogram plot.
 #'
 #' @export
 #' @param water_level
@@ -13,7 +10,7 @@ mip_data_plot <- function(mipfile, water_level){
 
   options(stringsAsFactors = FALSE)
 
-  mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
+  mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-4),".mhp")
   data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
 
   col_names <- c( "Depth (ft)",
@@ -57,11 +54,11 @@ mip_data_plot <- function(mipfile, water_level){
   # water_level <- as.numeric(water_level)
 
   chop<-function(x,d){
-      tail(head(x,-d),-d)
+    tail(head(x,-d),-d)
   }
 
   chopmiddle<-function(x,d){
-      tail(head(x,length(x)/2),length(x)*0.4)
+    tail(head(x,length(x)/2),length(x)*0.4)
   }
   d<-as.numeric(chopmiddle(data[,"Depth (ft)"],20))
   p<-chopmiddle(data[,"HPT Press. Avg (psi)"],20)
@@ -69,12 +66,12 @@ mip_data_plot <- function(mipfile, water_level){
   p_grad <- 0.44
 
   plot(d,p,
-  type='l',
-  col='black',
-  xlab="Depth (ft)",
-  ylab="Pressure (PSI)",
-  panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
-  abline(v = 0:100, lty = 2, col = 'lightgrey')))
+       type='l',
+       col='black',
+       xlab="Depth (ft)",
+       ylab="Pressure (PSI)",
+       panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
+                       abline(v = 0:100, lty = 2, col = 'lightgrey')))
   abline(min(p),0,col="green")
 
   intcpt<-as.numeric(water_level)
