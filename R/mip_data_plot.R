@@ -1,14 +1,14 @@
 #' Make a random plot
-#' 
+#'
 #' This function creates a random histogram plot.
-#' 
+#'
 #' @export
-#' @param water_level 
-#' @param mip_file 
+#' @param water_level
+#' @param mip_file
 mip_data_plot <- function(mipfile, water_level){
 
   if(substring(tolower(mipfile), nchar(mipfile)-3) != ".zip"){
-    stop('Uploaded data needs to be .zip file. ');
+    stop('Uploaded data needs to be a .zip file. ');
   }
 
   options(stringsAsFactors = FALSE)
@@ -16,14 +16,14 @@ mip_data_plot <- function(mipfile, water_level){
   mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
   data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
 
-  col_names <- c( "Depth (ft)",	
-                  "EC (mS/m)",	
-                  "ROP (ft/min)",	
-                  "Temp. Min (deg C)",	
-                  "Temp. Max (deg C)",	
-                  "MIP Pressure (psi)",	
-                  "MIP Flow (mL/min)",	
-                  "Depth (m)",	
+  col_names <- c( "Depth (ft)",
+                  "EC (mS/m)",
+                  "ROP (ft/min)",
+                  "Temp. Min (deg C)",
+                  "Temp. Max (deg C)",
+                  "MIP Pressure (psi)",
+                  "MIP Flow (mL/min)",
+                  "Depth (m)",
                   "ROP (m/min)",
                   "MIP Pressure (kPa)",
                   "Detector 1 Min (uV)",
@@ -53,7 +53,7 @@ mip_data_plot <- function(mipfile, water_level){
 
   colnames(data) <- col_names
 
-  waterlevels<-NULL
+  waterlevel<-NULL
   # water_level <- as.numeric(water_level)
 
   chop<-function(x,d){
@@ -63,8 +63,8 @@ mip_data_plot <- function(mipfile, water_level){
   chopmiddle<-function(x,d){
       tail(head(x,length(x)/2),length(x)*0.4)
   }
-  d<-as.numeric(chopmiddle(data[,1],20))
-  p<-chopmiddle(data[,21],20)
+  d<-as.numeric(chopmiddle(data[,"Depth (ft)"],20))
+  p<-chopmiddle(data[,"HPT Press. Avg (psi)"],20)
 
   p_grad <- 0.44
 
@@ -72,7 +72,7 @@ mip_data_plot <- function(mipfile, water_level){
   type='l',
   col='black',
   xlab="Depth (ft)",
-  ylab="Pressure (PSI)", 
+  ylab="Pressure (PSI)",
   panel.first = c(abline(h = 0:100, lty = 2, col = 'lightgrey'),
   abline(v = 0:100, lty = 2, col = 'lightgrey')))
   abline(min(p),0,col="green")
@@ -89,7 +89,7 @@ mip_data_plot <- function(mipfile, water_level){
   legend("topleft",col=c("red","black", "blue","green","orange"),lty=1,legend=c("Corrected Press.","HPT Pressure","Hydrostatic Press.", "Pressure Baseline", "Est K."))
   wlevel<-(min(p)-intcpt)/p_grad
   points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
-  text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)  
+  text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)
   waterlevels<-rbind(waterlevels,wlevel)
   EstK<-21.14*log10(chopmiddle(data[,23],20)/p_c)
   par(new=TRUE)
@@ -97,5 +97,5 @@ mip_data_plot <- function(mipfile, water_level){
   axis(4)
   mtext("EstK (ft/day)",side=4,line=3)
 
-  invisible();  
+  invisible();
 }
