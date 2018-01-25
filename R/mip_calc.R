@@ -6,7 +6,7 @@ mip_calc <- function(mipfile, water_level, ...){
 
     options(stringsAsFactors = FALSE)
 
-    mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-4),".mhp")
+    mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
     data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
 
     col_names <- c( "Depth (ft)",
