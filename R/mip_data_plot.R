@@ -77,7 +77,8 @@ mip_data_plot <- function(mipfile, water_level){
   grid()
 
   p_c<-p
-  p_c[which(d>water_level)]<-p[which(d>water_level)]-(d-water_level)*p_grad
+  belowwater<-which(d>water_level)
+  p_c[belowwater]<-p[belowwater]-((d[belowwater]-water_level)*p_grad)
 
 
 
