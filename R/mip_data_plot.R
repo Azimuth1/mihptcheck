@@ -70,8 +70,8 @@ tryCatch({
       scale_x_reverse()
 
     p2<-ggplot(data, aes(x=data$"Est K.", color = "Est. K.")) +
-      #scale_y_continuous(breaks=seq(0,max(data$"Est K.",na.rm=TRUE),10)) +
-      #scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
+      scale_y_continuous(breaks=seq(0,max(data$"Est K.",na.rm=TRUE),10)) +
+      scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle(basename(mipfile)) +
       xlab("Depth (ft)") +
       ylab("Est K cm/sec") +
