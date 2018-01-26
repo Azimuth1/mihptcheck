@@ -68,7 +68,8 @@ tryCatch({
       xlab("Depth (ft)") +
       ylab("Pressure (PSI)") +
       coord_flip()  +
-      scale_x_reverse()
+      scale_x_reverse() + 
+      theme(legend.position="left")
 
     p2<-ggplot(data, aes(x=data$"Est K.", color = "Est. K.")) +
       scale_y_continuous(breaks=seq(0,max(data$"Est K.",na.rm=TRUE),10)) +
