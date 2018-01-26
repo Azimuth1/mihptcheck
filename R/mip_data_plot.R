@@ -86,49 +86,47 @@ tryCatch({
 
 }, error = function(e){
 
-    plot(d, p,
-      type='l',
-      col='black',
-      xlab="Depth (ft)",
-      ylab="Pressure (PSI)",
-      ylim=c(0,40)
-    )
-    #abline(min(p),0,col="green")
-    grid()
-    #abline(intcpt,p_grad,col="blue")
 
-    lines(d, p_c, col="red")
+    stop(e);
+    # plot(d, p,
+    #   type='l',
+    #   col='black',
+    #   xlab="Depth (ft)",
+    #   ylab="Pressure (PSI)",
+    #   ylim=c(0,40)
+    # )
 
-    legend("topleft",
-      col = c("red", "black", "blue", "green", "orange"),
-      lty = 1,
-      legend = c(
-        "Corrected Pressure",
-        "HPT Pressure",
-        "Hydrostatic Press.",
-        "Baseline Pressure",
-        "Est K."
-      )
-    )
+    # grid()
 
-    #points(wlevel,min(p),pch=19,bg="blue",col="darkblue")
-    #text(wlevel,min(p),paste("waterlevel = ",wlevel),adj=c(0,1),col="blue",cex=0.75)
+    # lines(d, p_c, col="red")
 
-    par(new = TRUE)
+    # legend("topleft",
+    #   col = c("red", "black", "blue", "green", "orange"),
+    #   lty = 1,
+    #   legend = c(
+    #     "Corrected Pressure",
+    #     "HPT Pressure",
+    #     "Hydrostatic Press.",
+    #     "Baseline Pressure",
+    #     "Est K."
+    #   )
+    # )
 
-    plot(d, EstK,
-      axes = F,
-      type = "l",
-      col = "orange",
-      xlab = "",
-      ylab = ""
-    )
-    axis(4)
-    mtext("EstK (cm/sec)",
-      side = 4,
-      line = -1.5
-    )
-    invisible();
+    # par(new = TRUE)
+
+    # plot(d, EstK,
+    #   axes = F,
+    #   type = "l",
+    #   col = "orange",
+    #   xlab = "",
+    #   ylab = ""
+    # )
+    # axis(4)
+    # mtext("EstK (cm/sec)",
+    #   side = 4,
+    #   line = -1.5
+    # )
+    # invisible();
 
 })
 
