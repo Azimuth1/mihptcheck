@@ -52,7 +52,7 @@ tryCatch({
     data$"Est K (cm/sec)" <- NA
     data$"Corr HPT Press (psi)" <- NA
     #data$"Hydrostatic Pressure (psi)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
-    data$"Hydrostatic Pressure (psi)"[belowwater] <- (data$"Depth (ft)" - water_level) * 0.44
+    data$"Hydrostatic Pressure (psi)"[belowwater] <- (data$"Depth (ft)"[belowwater] - water_level) * 0.44
     data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
     data$"Est K (cm/sec)" <- EstK
 
