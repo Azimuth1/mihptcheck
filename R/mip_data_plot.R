@@ -39,6 +39,19 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   # PLOT SET TO TRUE
   ###################
 
+tryCatch({
+
+  ggplot(data, aes(d)) + 
+    geom_line(aes(y = p, colour = "HPT Pressure")) + 
+    geom_line(aes(y = EstK, colour = "var1")) +
+    scale_colour_manual(values=c("black", "orange")) +
+    coord_flip()+
+    scale_x_reverse()
+
+    invisible();
+
+}, error = function(e){
+
     plot(d, p,
       type='l',
       col='black',
@@ -82,6 +95,8 @@ mip_data_plot <- function(mipfile, water_level, plotting){
       line = -1.5
     )
     invisible();
+
+}
 
   }else{
   ###################
