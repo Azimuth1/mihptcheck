@@ -36,6 +36,17 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   #waterlevels<-rbind(waterlevels,wlevel)
   EstK <- 0.00745 * log10(data[,"HPT Flow Avg (mL/min)"] / p_c)  #cm/sec
 
+  data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
+  data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
+  data$"Hydrostatic Pressure (psi)" <- 0
+  data$"Est K (cm/sec)" <- NA
+  data$"Corr HPT Press (psi)" <- NA
+  #data$"Hydrostatic Pressure (psi)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
+  data$"Hydrostatic Pressure (psi)"[belowwater] <- (data$"Depth (ft)"[belowwater] - water_level) * 0.44
+  data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
+  data$"Est K (cm/sec)" <- EstK
+
+
   if(plotting==TRUE) {
   ###################
   # PLOT SET TO TRUE
@@ -44,18 +55,6 @@ mip_data_plot <- function(mipfile, water_level, plotting){
 tryCatch({
 
   plot_title = substr(basename(mipfile),0,nchar(basename(mipfile))-8)
-
-
-    data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
-    data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
-    data$"Hydrostatic Pressure (psi)" <- 0
-    data$"Est K (cm/sec)" <- NA
-    data$"Corr HPT Press (psi)" <- NA
-    #data$"Hydrostatic Pressure (psi)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
-    data$"Hydrostatic Pressure (psi)"[belowwater] <- (data$"Depth (ft)"[belowwater] - water_level) * 0.44
-    data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
-    data$"Est K (cm/sec)" <- EstK
-
     p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
       geom_line(aes(y = data$"Hydrostatic Pressure (psi)", color = "Hydrostatic Pressure"), linetype = "longdash") +
       geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
@@ -137,10 +136,6 @@ tryCatch({
   ###################
 
     #mip_file_data<-cbind(data,p_c,EstK)
-    data$"Est K (cm/sec)" <- NA
-    data$"Corr HPT Press (psi)" <- NA
-    data$"Est K (cm/sec)" <- EstK
-    data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
     mip_file_data<-data
     return(mip_file_data)
   }
