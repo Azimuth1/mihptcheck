@@ -139,7 +139,12 @@ function update_zipfile_input(session){
 
     $.get(file_names, function(f){
 
-      zipname = f.split('\n')[0]
+
+
+      file_list = f.split('\n')
+      var resultArray = file_list.filter(function(d){
+        debugger
+      });
       filename = zipname.substr(0, f.split('\n')[0].length - 8);
 
       JSZipUtils.getBinaryContent(file_names + '/' + zipname, function(err, data) {
@@ -198,7 +203,7 @@ $(document).ajaxStop(function() {
   #user_input_panel{
     font-family: 'Source Sans Pro', sans-serif;
     margin-left: 20px;
-    height: 400px;
+    height: 500px;
     margin-bottom: 0px !important;
   }
 
@@ -209,6 +214,11 @@ $(document).ajaxStop(function() {
       margin-bottom: 0px !important;
     }
 
+    .plot_btn{
+      font-size: 10px !important;
+      margin-left: 6px !important;
+    }
+
   #project_title{
     font-size: 30px;
     padding-bottom: 15px;
@@ -216,9 +226,10 @@ $(document).ajaxStop(function() {
   }
 
   #water_level{
-    width: 80px;
+    width: 70px;
     margin-left: 5px;
     padding-left: 5px;
+    font-size: 12px !important;
   }
   #logo{
     padding: 30px;
