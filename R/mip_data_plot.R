@@ -74,7 +74,7 @@ tryCatch({
       geom_line(aes(y=data$"Est K.", color = "Est. K."),linetype = "longdash") +
       scale_y_continuous(breaks=seq(0,max(data$"Est K.",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
-      ggtitle(b"Est K") +
+      ggtitle("Est K") +
       xlab("Depth (ft)") +
       ylab("Est K cm/sec") +
       coord_flip()  +
