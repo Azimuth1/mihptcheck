@@ -198,16 +198,16 @@ $(document).ajaxStop(function() {
   #user_input_panel{
     font-family: 'Source Sans Pro', sans-serif;
     margin-left: 20px;
-    height: 500px;
+    height: 400px;
     margin-bottom: 0px !important;
   }
 
   #plotdiv {
-        width: 800px;
-        height: 500px;
-        margin-left: 20px;
-        margin-bottom: 0px !important;
-      }
+      width: 800px;
+      height: 750px;
+      margin-left: 20px;
+      margin-bottom: 0px !important;
+    }
 
   #project_title{
     font-size: 30px;
@@ -259,9 +259,9 @@ $(document).ajaxStop(function() {
       font-size: 14px;
     }
 
-.project_wrapper{
-  margin-top:20px;
-}
+  .project_wrapper{
+    margin-top:20px;
+  }
 
 </style>
 
@@ -292,7 +292,7 @@ $(document).ajaxStop(function() {
             <fieldset id="step_3">
               <legend class="custom_legend">(3) Download Updated .zip</legend>
             <br>
-              <button id="convert_button" type="button" class="btn btn-primary" disabled="disabled">Do it</button>
+              <button id="convert_button" type="button" class="btn btn-primary" disabled="disabled">Download</button>
             </fieldset>
         </form>
               <!-- R Relayed Message and Progress Information -->
@@ -302,6 +302,12 @@ $(document).ajaxStop(function() {
         <div class="progress progress-striped active">
           <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
+      </div>
+      <div="information">
+        OpenCPU-0.4.js
+        <br>
+        ggplot
+    </div>
       </div>
       </div>
       <div id="plotdiv" class="flex-item well"></div>
