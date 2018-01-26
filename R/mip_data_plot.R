@@ -47,6 +47,7 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   data$"Est K (cm/sec)" <- EstK
 
   # If water level is greater than depth of borehole
+  # ought to eventually max input text box with javascript
   if(max(data$"Depth (ft)",na.rm=TRUE)<water_level){
     stop('Water level is greater than depth.');
   }
