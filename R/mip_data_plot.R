@@ -96,7 +96,7 @@ tryCatch({
     )
     invisible();
 
-}
+})
 
   }else{
   ###################
