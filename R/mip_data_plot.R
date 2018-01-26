@@ -78,8 +78,8 @@ tryCatch({
       coord_flip()  +
       scale_x_reverse()
 
-    #plot_grid(p1, p2 align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
-    p1
+    plot_grid(p1, p2 align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
+
 
 }, error = function(e){
 
