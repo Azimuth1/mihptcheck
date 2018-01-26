@@ -36,6 +36,17 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   #waterlevels<-rbind(waterlevels,wlevel)
   EstK <- 0.00745 * log10(data[,"HPT Flow Avg (mL/min)"] / p_c)  #cm/sec
 
+  data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
+  data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
+  data$"Hydrostatic Pressure (psi)" <- 0
+  data$"Est K (cm/sec)" <- NA
+  data$"Corr HPT Press (psi)" <- NA
+  #data$"Hydrostatic Pressure (psi)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
+  data$"Hydrostatic Pressure (psi)"[belowwater] <- (data$"Depth (ft)"[belowwater] - water_level) * 0.44
+  data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
+  data$"Est K (cm/sec)" <- EstK
+
+
   if(plotting==TRUE) {
   ###################
   # PLOT SET TO TRUE
@@ -44,35 +55,24 @@ mip_data_plot <- function(mipfile, water_level, plotting){
 tryCatch({
 
   plot_title = substr(basename(mipfile),0,nchar(basename(mipfile))-8)
-
-
-    data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
-    data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
-    data$"Hydrostatic Pressure (PSI)" <- NA
-    data$"Est K (cm/s)" <- NA
-    data$"Corrected Pressure (PSI)" <- NA
-    data$"Hydrostatic Pressure (PSI)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
-    data$"Corrected Pressure (PSI)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (PSI)"
-    data$"Est K (cm/s)" <- EstK
-
     p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y = data$"Hydrostatic Pressure (PSI)", color = "Hydrostatic Pressure"), linetype = "longdash") +
+      geom_line(aes(y = data$"Hydrostatic Pressure (psi)", color = "Hydrostatic Pressure"), linetype = "longdash") +
       geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
-      geom_line(aes(y = data$"Corrected Pressure (PSI)", color = "Corrected Pressure")) +
-      geom_vline(aes(xintercept = water_level, color = "Water Table"), linetype = "dashed") +
-      scale_color_manual(values = c("red", "orange","black", "blue", "lightblue")) +
+      geom_line(aes(y = data$"Corr HPT Press (psi)", color = "Corrected Pressure")) +
+      geom_vline(aes(xintercept = water_level, color = "Depth to Water"), linetype = "dashed") +
+      scale_color_manual(values = c("red","lightblue","black","blue" )) +
       scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle(basename(mipfile)) +
       xlab("Depth (ft)") +
-      ylab("Pressure (PSI)") +
+      ylab("Pressure (psi)") +
       coord_flip()  +
       scale_x_reverse() +
       theme(legend.position="left")
 
     p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y=data$"Est K (cm/s)", color = "Est. K."),linetype = "longdash") +
-      scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/s)",na.rm=TRUE),10)) +
+      geom_line(aes(y=data$"Est K (cm/sec)", color = "orange"),linetype = "longdash") +
+      scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/sec)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle("Est K") +
       xlab("Depth (ft)") +
@@ -136,8 +136,6 @@ tryCatch({
   ###################
 
     #mip_file_data<-cbind(data,p_c,EstK)
-    data$"Corrected Pressure (PSI)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (PSI)"
-    data$"Est K (cm/s)" <- EstK
     mip_file_data<-data
     return(mip_file_data)
   }
@@ -181,14 +179,4 @@ fix_column_names <- function(data) {
 
     colnames(data) <- col_names
     return (data)
-}
-
-# from Jason
-chop<-function(x,d){
-  tail(head(x,-d),-d)
-}
-
-# from Jason
-chopmiddle<-function(x,d){
-  tail(head(x,length(x)/2),length(x)*0.4)
 }
