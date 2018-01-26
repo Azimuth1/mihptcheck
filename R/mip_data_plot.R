@@ -6,7 +6,9 @@ mip_data_plot <- function(mipfile, water_level, plotting){
 
   options(stringsAsFactors = FALSE)
 
-  mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
+  # mhp_filename <- paste0(substr(basename(mipfile),0,nchar(basename(mipfile))-8),".mhp")
+  fname = unzip(mipfile, list=TRUE)$Name
+  mhp_filename = fname[grep(".mhp", fname)]
   data <- read.table(unz(mipfile, mhp_filename), header=T, quote="\"", sep="\t", na.strings = "n/a", row.names=NULL)
   
   data<- fix_column_names(data)
