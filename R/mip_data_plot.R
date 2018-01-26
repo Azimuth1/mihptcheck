@@ -72,7 +72,7 @@ tryCatch({
 
     p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
       geom_line(aes(y=data$"Est K (cm/s)", color = "Est. K."),linetype = "longdash") +
-      scale_y_continuous(breaks=seq(0,max(data$"Est K. (cm/s)",na.rm=TRUE),10)) +
+      scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/s)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle("Est K") +
       xlab("Depth (ft)") +
