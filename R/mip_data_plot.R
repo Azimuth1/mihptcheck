@@ -50,8 +50,6 @@ tryCatch({
     coord_flip()+
     scale_x_reverse()
 
-    invisible();
-
 }, error = function(e){
 
     plot(d, p,
