@@ -90,8 +90,10 @@ $("#convert_button").on("click", function(){
     }, function(session){
       //success
       update_zipfile_input(session)
+      $("#convert_button").attr("disabled", "disabled");
     }).fail(function(jqXHR){
        //failure
+       $("#convert_button").attr("disabled", "disabled");
        errormsg(jqXHR.responseText);
       })
 });
