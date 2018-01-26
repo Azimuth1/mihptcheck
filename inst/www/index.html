@@ -101,6 +101,7 @@ $("#convert_button").on("click", function(){
   //Check if user changes water level input
   document.getElementById("water_level").addEventListener('change', function(){
       $("#preview_button").removeAttr("disabled");
+      $("#convert_button").removeAttr("disabled");
   });
 
 
@@ -119,9 +120,11 @@ $("#preview_button").on("click", function(){
       //configure inputs on/off
       //success
       $("#preview_button").attr("disabled", "disabled");
+      $("#convert_button").removeAttr("disabled");
     }).fail(function(jqXHR){
       //failure
       $("#preview_button").removeAttr("disabled");
+      $("#convert_button").attr("disabled", "disabled");
       errormsg(jqXHR.responseText);
      })
 
@@ -271,7 +274,7 @@ html, body {
   <div class="project_wrapper">
     <div class="flex-container">
       <div id="user_input_panel" class="flex-item well">
-        <div id="project_title">MIHPT Log QA v1.2</div>
+        <div id="project_title">MIHPT Log QA v1.3</div>
         <div id="credits">by <a href="http://www.azimuth1.com">Azimuth1</a></div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
