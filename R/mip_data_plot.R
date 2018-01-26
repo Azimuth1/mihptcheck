@@ -46,6 +46,10 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
   data$"Est K (cm/sec)" <- EstK
 
+  # If water level is greater than depth of borehole
+  if(max(data$"Depth (ft)",na.rm=TRUE)<water_level){
+    stop('Water level is greater than depth.');
+  }
 
   if(plotting==TRUE) {
   ###################
