@@ -136,8 +136,8 @@ tryCatch({
   ###################
 
     #mip_file_data<-cbind(data,p_c,EstK)
-    data$"Corrected Pressure (PSI)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (PSI)"
-    data$"Est K (cm/s)" <- EstK
+    data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
+    data$"Est K (cm/sec)" <- EstK
     mip_file_data<-data
     return(mip_file_data)
   }
