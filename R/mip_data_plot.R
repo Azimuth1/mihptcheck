@@ -48,31 +48,31 @@ tryCatch({
 
     data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
     data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
-    data$"Hydrostatic Pressure (PSI)" <- NA
-    data$"Est K (cm/s)" <- NA
-    data$"Corrected Pressure (PSI)" <- NA
-    data$"Hydrostatic Pressure (PSI)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
-    data$"Corrected Pressure (PSI)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (PSI)"
-    data$"Est K (cm/s)" <- EstK
+    data$"Hydrostatic Pressure (psi)" <- NA
+    data$"Est K (cm/sec)" <- NA
+    data$"Corr HPT Press (psi)" <- NA
+    data$"Hydrostatic Pressure (psi)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
+    data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
+    data$"Est K (cm/sec)" <- EstK
 
     p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y = data$"Hydrostatic Pressure (PSI)", color = "Hydrostatic Pressure"), linetype = "longdash") +
+      geom_line(aes(y = data$"Hydrostatic Pressure (psi)", color = "Hydrostatic Pressure"), linetype = "longdash") +
       geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
-      geom_line(aes(y = data$"Corrected Pressure (PSI)", color = "Corrected Pressure")) +
+      geom_line(aes(y = data$"Corr HPT Press (psi)", color = "Corrected Pressure")) +
       geom_vline(aes(xintercept = water_level, color = "Water Table"), linetype = "dashed") +
       scale_color_manual(values = c("red", "orange","black", "blue", "lightblue")) +
       scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle(basename(mipfile)) +
       xlab("Depth (ft)") +
-      ylab("Pressure (PSI)") +
+      ylab("Pressure (psi)") +
       coord_flip()  +
       scale_x_reverse() +
       theme(legend.position="left")
 
     p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y=data$"Est K (cm/s)", color = "Est. K."),linetype = "longdash") +
-      scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/s)",na.rm=TRUE),10)) +
+      geom_line(aes(y=data$"Est K (cm/sec)", color = "Est. K."),linetype = "longdash") +
+      scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/sec)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle("Est K") +
       xlab("Depth (ft)") +
