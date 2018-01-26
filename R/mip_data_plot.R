@@ -53,7 +53,7 @@ tryCatch({
     data$"Corrected Pressure (PSI)" <- NA
     data$"Hydrostatic Pressure (PSI)"[data$"Depth (ft)" >= water_level] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
     data$"Corrected Pressure (PSI)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (PSI)"
-    data$"Est K." <- max(data$"HPT Press. Avg (psi)", na.rm=TRUE) - data$"Corrected Pressure (PSI)"
+    data$"Est K." <- EstK
 
     p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
       geom_line(aes(y = data$"Hydrostatic Pressure (PSI)", color = "Hydrostatic Pressure"), linetype = "longdash") +
@@ -67,18 +67,19 @@ tryCatch({
       xlab("Depth (ft)") +
       ylab("Pressure (PSI)") +
       coord_flip()  +
-      scale_x_reverse() + 
+      scale_x_reverse() +
       theme(legend.position="left")
 
     p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
       geom_line(aes(y=data$"Est K.", color = "Est. K."),linetype = "longdash") +
       scale_y_continuous(breaks=seq(0,max(data$"Est K.",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
-      ggtitle(basename(mipfile)) +
+      ggtitle("Est K") +
       xlab("Depth (ft)") +
       ylab("Est K cm/sec") +
       coord_flip()  +
-      scale_x_reverse()
+      scale_x_reverse() +
+      theme(legend.position="none")
 
     plot_grid(p1, p2, align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
 
