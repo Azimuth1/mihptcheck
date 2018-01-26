@@ -142,12 +142,14 @@ function update_zipfile_input(session){
 
 
       file_list = f.split('\n')
-      var resultArray = file_list.filter(function(d){
-        debugger
+      zipname = file_list.filter(function(d){
+        if(d.substr(d.length - 3)=="zip"){
+          return d
+        }
       });
-      filename = zipname.substr(0, f.split('\n')[0].length - 8);
+      filename = zipname[0].substr(0, f.split('\n')[0].length - 8);
 
-      JSZipUtils.getBinaryContent(file_names + '/' + zipname, function(err, data) {
+      JSZipUtils.getBinaryContent(file_names + '/' + zipname[0], function(err, data) {
 
         if(err) {throw err;}// or handle err
 
@@ -157,7 +159,7 @@ function update_zipfile_input(session){
             d = d.replace(/,/g, '\t').replace(/['"]+/g, '\t')
             zip.file(filename+'.mhp', d)
             var content = zip.generate({type:"blob"});
-            saveAs(content, zipname);
+            saveAs(content, zipname[0]);
         });
 
       });
