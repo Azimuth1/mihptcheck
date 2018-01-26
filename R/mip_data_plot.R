@@ -60,7 +60,7 @@ tryCatch({
       geom_line(aes(y = data$"Hydrostatic Pressure (psi)", color = "Hydrostatic Pressure"), linetype = "longdash") +
       geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
       geom_line(aes(y = data$"Corr HPT Press (psi)", color = "Corrected Pressure")) +
-      geom_vline(aes(xintercept = water_level, color = "Water Table"), linetype = "dashed") +
+      geom_vline(aes(xintercept = water_level, color = "Depth to Water"), linetype = "dashed") +
       scale_color_manual(values = c("orange","black", "blue", "lightblue")) +
       scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
@@ -137,8 +137,10 @@ tryCatch({
   ###################
 
     #mip_file_data<-cbind(data,p_c,EstK)
-    data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
+    data$"Est K (cm/sec)" <- NA
+    data$"Corr HPT Press (psi)" <- NA
     data$"Est K (cm/sec)" <- EstK
+    data$"Corr HPT Press (psi)" <- data$"HPT Press. Avg (psi)" - data$"Hydrostatic Pressure (psi)"
     mip_file_data<-data
     return(mip_file_data)
   }
