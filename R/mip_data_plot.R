@@ -56,12 +56,11 @@ tryCatch({
     data$"Est K." <- max(data$"HPT Press. Avg (psi)", na.rm=TRUE) - data$"Corrected Pressure (PSI)"
 
     p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y = data$"Hydrostatic Pressure (PSI)", colour = "Hydrostatic Pressure"), linetype = "longdash") +
-      geom_line(aes(y = data$"HPT Press. Avg (psi)", colour="HPT Press. Avg (psi)")) +
-      geom_line(aes(y = data$"Corrected Pressure (PSI)", colour = "Corrected Pressure")) +
-      geom_line(aes(y = data$"Est K.", colour = "Est. K.")) +
-      geom_vline(aes(xintercept = water_level, colour = "Water Table"), linetype = "dashed") +
-      scale_colour_manual(values = c("red", "orange","black", "blue", "lightblue")) +
+      geom_line(aes(y = data$"Hydrostatic Pressure (PSI)", color = "Hydrostatic Pressure"), linetype = "longdash") +
+      geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
+      geom_line(aes(y = data$"Corrected Pressure (PSI)", color = "Corrected Pressure")) +
+      geom_vline(aes(xintercept = water_level, color = "Water Table"), linetype = "dashed") +
+      scale_color_manual(values = c("red", "orange","black", "blue", "lightblue")) +
       scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle(basename(mipfile)) +
@@ -71,7 +70,8 @@ tryCatch({
       scale_x_reverse() + 
       theme(legend.position="left")
 
-    p2<-ggplot(data, aes(x=data$"Est K.", color = "Est. K.")) +
+    p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
+      geom_line(aes(y=data$"Est K.", color = "Est. K."),linetype = "longdash") +
       scale_y_continuous(breaks=seq(0,max(data$"Est K.",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle(basename(mipfile)) +
@@ -80,7 +80,7 @@ tryCatch({
       coord_flip()  +
       scale_x_reverse()
 
-    plot_grid(p1, p2 align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
+    plot_grid(p1, p2, align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
 
 
 }, error = function(e){
