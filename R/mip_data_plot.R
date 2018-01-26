@@ -61,7 +61,7 @@ tryCatch({
       geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
       geom_line(aes(y = data$"Corr HPT Press (psi)", color = "Corrected Pressure")) +
       geom_vline(aes(xintercept = water_level, color = "Depth to Water"), linetype = "dashed") +
-      scale_color_manual(values = c("orange","black", "blue", "lightblue")) +
+      scale_color_manual(values = c("orange","lightblue","black","blue" )) +
       scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
       scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
       ggtitle(basename(mipfile)) +
