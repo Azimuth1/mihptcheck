@@ -48,7 +48,7 @@ tryCatch({
 
     data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
     data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
-    data$"Hydrostatic Pressure (psi)" <- NA
+    data$"Hydrostatic Pressure (psi)" <- 0
     data$"Est K (cm/sec)" <- NA
     data$"Corr HPT Press (psi)" <- NA
     #data$"Hydrostatic Pressure (psi)"[belowwater] <- min(data$"HPT Press. Avg (psi)", na.rm=TRUE) + (data$"Depth (ft)" - water_level) * 0.44
