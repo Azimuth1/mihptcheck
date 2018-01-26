@@ -124,6 +124,7 @@ $("#preview_button").on("click", function(){
     }).fail(function(jqXHR){
       //failure
       $("#preview_button").removeAttr("disabled");
+      $(".input-medium").removeAttr("disabled");
       $("#convert_button").attr("disabled", "disabled");
       errormsg(jqXHR.responseText);
      })
@@ -152,7 +153,7 @@ function update_zipfile_input(session){
         }
       });
       
-      filename = zipname[0].substr(0, f.split('\n')[0].length - 4)
+      filename = zipname[0].substr(0, zipname[0].length - 4)
 
       JSZipUtils.getBinaryContent(file_names + '/' + zipname[0], function(err, data) {
 
