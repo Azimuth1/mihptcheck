@@ -74,7 +74,7 @@ mip_data_plot <- function(mipfile, water_level, plotting){
         scale_x_reverse() +
         theme(legend.position="left")+
         geom_vline(aes(xintercept = water_level), linetype = "dashed", colour="blue",show.legend=FALSE)+
-        geom_text(aes(x=water_level, label="\nDepth to Water (ft)", y=0), colour="purple", angle=0, text=element_text(size=11))
+        geom_text(aes(x=water_level, label="\nDepth to Water (ft)", y=5), colour="blue", angle=0, text=element_text(size=13))
 
         p1 <- p1 + guides(fill=guide_legend(title="Legend"))
 
