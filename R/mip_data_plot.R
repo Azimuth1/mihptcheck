@@ -73,7 +73,9 @@ mip_data_plot <- function(mipfile, water_level, plotting){
         coord_flip()  +
         scale_x_reverse() +
         theme(legend.position="left")+
-        geom_vline(aes(xintercept = water_level), linetype = "dashed",show.legend=FALSE)
+        geom_vline(aes(xintercept = water_level), linetype = "dashed", colour="blue"show.legend=FALSE)+
+        geom_text(aes(x=water_level, label="\nWater Table", y=20), colour="blue", angle=90, text=element_text(size=11)) +
+
 
         p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
           geom_line(aes(y=data$"Est K (cm/sec)", color = "orange"),linetype = "longdash") +
