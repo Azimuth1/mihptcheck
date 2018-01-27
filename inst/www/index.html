@@ -27,7 +27,7 @@ $(document).ready(function() {
 $("#convert_button").attr("disabled", "disabled");
 $("#preview_button").attr("disabled", "disabled");
 $("#water_level").attr("disabled", "disabled");
-
+$("#session_url").attr("disabled", "disabled");
 //automatically upload CSV file on change.
 $("#mipfile").on("change", function(){
 
@@ -44,7 +44,8 @@ $("#mipfile").on("change", function(){
       var req = ocpu.call("zip_validation", {
           mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-          $("#session_url").attr("href", session.getLoc())
+          $("#session_url").removeAttr("disabled");
+          $("#session_url").attr("href", session.getLoc()).attr("target","_blank")
           $("#convert_button").attr("href", session.getLoc())
           $("#water_level").removeAttr("disabled");
           $("#convert_button").removeAttr("disabled");
@@ -275,9 +276,9 @@ html, body {
 }
 
 #session_url{
-  position: fixed;
-  top: 0;
-  left: 20px;
+  position: absolute;
+  top: 20px;
+  left: 360px;
 }
 </style>
 
