@@ -44,8 +44,7 @@ $("#mipfile").on("change", function(){
       var req = ocpu.call("zip_validation", {
           mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-          var session_url = session.getLoc().replace(/.*\/\/[^\/]*/, '')
-          $("#session_url").removeAttr("href").attr("href", session_url)
+          $("#session_url").attr("href", session.getLoc())
           $("#convert_button").attr("href", session.getLoc())
           $("#water_level").removeAttr("disabled");
           $("#convert_button").removeAttr("disabled");
@@ -290,8 +289,6 @@ html, body {
               <div class="form-group">
                  <input type="file" id="mipfile">
               </div>
-              <a id="session_url" href="#">Session URL</a>
-
           </fieldset>
           <fieldset id="step_2">
             <legend class="custom_legend">(2) Adjust Water Depth to add Corrected Pressure and Est K.</legend>
@@ -316,6 +313,7 @@ html, body {
           <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
       </div>
+      <a id="session_url">Session URL</a>
     </div>
     <div id="plotdiv" class="flex-item well"></div>
   </div>
