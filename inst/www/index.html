@@ -44,7 +44,7 @@ $("#mipfile").on("change", function(){
       var req = ocpu.call("zip_validation", {
           mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-          $("#session_url").attr("href", '"'+session.getLoc()+'"')
+          $("#session_url").removeAttr("href").attr("href", '"'+session.getLoc()+'"')
           $("#convert_button").attr("href", session.getLoc())
           $("#water_level").removeAttr("disabled");
           $("#convert_button").removeAttr("disabled");
@@ -289,7 +289,7 @@ html, body {
               <div class="form-group">
                  <input type="file" id="mipfile">
               </div>
-              <a id="session_url">Session URL</a>
+              <a id="session_url" href="#">Session URL</a>
 
           </fieldset>
           <fieldset id="step_2">
