@@ -168,7 +168,6 @@ function update_zipfile_input(session){
                 new_file += "\n"
                 new_file += d.split('\n')[i].replace(/"/g, '').replace(/123qwe456rty/, '\/n/a').replace(/"123qwe456rty"/g, 'n/a').replace(/123qwe456rty/g, 'n/a')
             }
-            new_file = new_file.
             zip.file(filename+'.mhp', new_file)
             var content = zip.generate({type:"blob"});
             saveAs(content, zipname[0]);
