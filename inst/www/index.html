@@ -166,7 +166,7 @@ function update_zipfile_input(session){
             var new_file = d.split('\n')[0]
             for (var i = 1; i < d.split('\n').length; i++){
                 new_file += "\n"
-                new_file += d.split('\n')[i].replace(/  +/, ' ').replace(/"/, '').replace(/ /, '\t').replace(/"123qwe456rty"/, 'n/a')
+                new_file += d.split('\n')[i].replace(/"/g, '').replace(/123qwe456rty/, 'n/a')
             }
             zip.file(filename+'.mhp', d)
             var content = zip.generate({type:"blob"});
