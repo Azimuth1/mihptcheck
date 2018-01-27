@@ -44,7 +44,7 @@ $("#mipfile").on("change", function(){
       var req = ocpu.call("zip_validation", {
           mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-          $("#session_url").empty().append('<a href="' +session.getLoc()+ '"></a>');
+          $("#session_url").empty().append('Session URL: <a href=' +session.getLoc()+ '></a>');
           $("#convert_button").attr("href", session.getLoc())
           $("#water_level").removeAttr("disabled");
           $("#convert_button").removeAttr("disabled");
@@ -281,7 +281,7 @@ html, body {
   <div class="project_wrapper">
     <div class="flex-container">
       <div id="user_input_panel" class="flex-item well">
-        <div id="project_title">MIHPT Log QA v1.5</div>
+        <div id="project_title">MIHPT Log QA v1.6</div>
         <div id="credits">by <a href="http://www.azimuth1.com">Azimuth1</a></div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
