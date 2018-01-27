@@ -68,7 +68,8 @@ mip_data_plot <- function(mipfile, water_level, plotting){
         # scale_color_manual(values = c("red","lightblue","black","blue" )) +
         scale_color_manual(values = c("red","lightblue","black","blue" ),
                            guide = guide_legend(override.aes = list(
-                             linetype = c("solid","solid", "solid", "dashed")))) +
+                             linetype = c("solid","solid", "solid", "dashed"),
+                             shape = c(NA, NA, NA, NA)))) +
         scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
         scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
         ggtitle(basename(mipfile)) +
