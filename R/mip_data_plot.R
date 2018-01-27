@@ -57,83 +57,83 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   # PLOT SET TO TRUE
   ###################
 
-tryCatch({
+    tryCatch({
 
-  plot_title = substr(basename(mipfile),0,nchar(basename(mipfile))-8)
-    p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y = data$"Hydrostatic Pressure (psi)", color = "Hydrostatic Pressure"), linetype = "longdash") +
-      geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
-      geom_line(aes(y = data$"Corr HPT Press (psi)", color = "Corrected Pressure")) +
-      geom_vline(aes(xintercept = water_level, color = "Depth to Water"), linetype = "dashed") +
-      scale_color_manual(values = c("red","lightblue","black","blue" )) +
-      scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
-      scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
-      ggtitle(basename(mipfile)) +
-      xlab("Depth (ft)") +
-      ylab("Pressure (psi)") +
-      coord_flip()  +
-      scale_x_reverse() +
-      theme(legend.position="left")
+      plot_title = substr(basename(mipfile),0,nchar(basename(mipfile))-8)
+        p1<-ggplot(data, aes(x = data$"Depth (ft)")) +
+          geom_line(aes(y = data$"Hydrostatic Pressure (psi)", color = "Hydrostatic Pressure"), linetype = "longdash") +
+          geom_line(aes(y = data$"HPT Press. Avg (psi)", color="HPT Press. Avg (psi)")) +
+          geom_line(aes(y = data$"Corr HPT Press (psi)", color = "Corrected Pressure")) +
+          geom_vline(aes(xintercept = water_level, color = "Depth to Water"), linetype = "dashed") +
+          scale_color_manual(values = c("red","lightblue","black","blue" )) +
+          scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
+          scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
+          ggtitle(basename(mipfile)) +
+          xlab("Depth (ft)") +
+          ylab("Pressure (psi)") +
+          coord_flip()  +
+          scale_x_reverse() +
+          theme(legend.position="left")
 
-    p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
-      geom_line(aes(y=data$"Est K (cm/sec)", color = "orange"),linetype = "longdash") +
-      scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/sec)",na.rm=TRUE),10)) +
-      scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
-      ggtitle("Est K") +
-      xlab("Depth (ft)") +
-      ylab("Est K (cm/sec)") +
-      coord_flip()  +
-      scale_x_reverse() +
-      theme(legend.position="none")
+        p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
+          geom_line(aes(y=data$"Est K (cm/sec)", color = "orange"),linetype = "longdash") +
+          scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/sec)",na.rm=TRUE),10)) +
+          scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
+          ggtitle("Est K") +
+          xlab("Depth (ft)") +
+          ylab("Est K (cm/sec)") +
+          coord_flip()  +
+          scale_x_reverse() +
+          theme(legend.position="none")
 
-    plot_grid(p1, p2, align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
-
-
-}, error = function(e){
+        plot_grid(p1, p2, align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
 
 
-    stop(e);
-    # plot(d, p,
-    #   type='l',
-    #   col='black',
-    #   xlab="Depth (ft)",
-    #   ylab="Pressure (PSI)",
-    #   ylim=c(0,40)
-    # )
+    }, error = function(e){
 
-    # grid()
 
-    # lines(d, p_c, col="red")
+        stop(e);
+        # plot(d, p,
+        #   type='l',
+        #   col='black',
+        #   xlab="Depth (ft)",
+        #   ylab="Pressure (PSI)",
+        #   ylim=c(0,40)
+        # )
 
-    # legend("topleft",
-    #   col = c("red", "black", "blue", "green", "orange"),
-    #   lty = 1,
-    #   legend = c(
-    #     "Corrected Pressure",
-    #     "HPT Pressure",
-    #     "Hydrostatic Press.",
-    #     "Baseline Pressure",
-    #     "Est K."
-    #   )
-    # )
+        # grid()
 
-    # par(new = TRUE)
+        # lines(d, p_c, col="red")
 
-    # plot(d, EstK,
-    #   axes = F,
-    #   type = "l",
-    #   col = "orange",
-    #   xlab = "",
-    #   ylab = ""
-    # )
-    # axis(4)
-    # mtext("EstK (cm/sec)",
-    #   side = 4,
-    #   line = -1.5
-    # )
-    # invisible();
+        # legend("topleft",
+        #   col = c("red", "black", "blue", "green", "orange"),
+        #   lty = 1,
+        #   legend = c(
+        #     "Corrected Pressure",
+        #     "HPT Pressure",
+        #     "Hydrostatic Press.",
+        #     "Baseline Pressure",
+        #     "Est K."
+        #   )
+        # )
 
-})
+        # par(new = TRUE)
+
+        # plot(d, EstK,
+        #   axes = F,
+        #   type = "l",
+        #   col = "orange",
+        #   xlab = "",
+        #   ylab = ""
+        # )
+        # axis(4)
+        # mtext("EstK (cm/sec)",
+        #   side = 4,
+        #   line = -1.5
+        # )
+        # invisible();
+
+    })
 
   }else{
   ###################
@@ -141,9 +141,15 @@ tryCatch({
   ###################
 
     #mip_file_data<-cbind(data,p_c,EstK)
-    mip_file_data<-data
-    return(mip_file_data)
+    data_fixed <- openCPU_NA_error_fix(data)
+    return(data_fixed)
   }
+}
+
+openCPU_NA_error_fix <- function(data){
+  # find unique code '123qwe456rty' inside index.html and replace
+  data[is.na(data)] <- '123qwe456rty'
+  return(data)
 }
 
 fix_column_names <- function(data) {
