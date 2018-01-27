@@ -44,7 +44,7 @@ $("#mipfile").on("change", function(){
       var req = ocpu.call("zip_validation", {
           mipfile : $("#mipfile")[0].files[0]
       }, function(session){
-          $("#session_url").removeAttr("href").attr("href", '"'+session.getLoc()+'"')
+          $("#session_url").removeAttr("href").attr("href", session.getLoc())
           $("#convert_button").attr("href", session.getLoc())
           $("#water_level").removeAttr("disabled");
           $("#convert_button").removeAttr("disabled");
