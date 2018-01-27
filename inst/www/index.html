@@ -166,7 +166,7 @@ function update_zipfile_input(session){
         zip = new JSZip(data);
 
         $.get(tab_file, function(d){
-            var new_file = d.split('\n')[0]
+            var new_file = d.split('\n')[0].replace(/\s/gi, "\t")
             for (var i = 1; i < d.split('\n').length; i++){
                 new_file += "\n"
                 new_file += d.split('\n')[i].replace(/"/g, '').replace(/\s/gi, "\t").replace(/123qwe456rty/g, "n/a")
