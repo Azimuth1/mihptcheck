@@ -90,6 +90,7 @@ $("#convert_button").on("click", function(){
       plotting : 'FALSE'
     }, function(session){
       //success
+      $("#session_url").attr("href", session.getLoc()).attr("target","_blank")
       update_zipfile_input(session)
       $("#convert_button").attr("disabled", "disabled");
     }).fail(function(jqXHR){
@@ -120,6 +121,7 @@ $("#preview_button").on("click", function(){
     }, function(session){
       //configure inputs on/off
       //success
+      $("#session_url").attr("href", session.getLoc()).attr("target","_blank")
       $("#preview_button").attr("disabled", "disabled");
       $("#convert_button").removeAttr("disabled");
     }).fail(function(jqXHR){
