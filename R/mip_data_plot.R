@@ -67,16 +67,14 @@ mip_data_plot <- function(mipfile, water_level, plotting){
         scale_color_manual(values = c("red","lightblue","black","blue" )) +
         scale_y_continuous(breaks=seq(0,max(data$"HPT Press. Avg (psi)",na.rm=TRUE),10)) +
         scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
-        ggtitle(basename(mipfile)) +
+        ggtitle(basename(gsub('.{3}$', '', mipfile))) +
         xlab("Depth (ft)") +
         ylab("Pressure (psi)") +
         coord_flip()  +
         scale_x_reverse() +
         theme(legend.position="left")+
         geom_vline(aes(xintercept = water_level), linetype = "dashed", colour="blue",show.legend=FALSE)+
-        geom_text(aes(x=water_level, label="\nDepth to Water (ft)", y=5), colour="blue", angle=0, text=element_text(size=13))
-
-        p1 <- p1 + guides(fill=guide_legend(title="Legend"))
+        geom_text(aes(x=water_level, label="\nDepth  to  Water  (ft)", y=1), colour="blue", angle=0, text=element_text(size=13))
 
         p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
           geom_line(aes(y=data$"Est K (cm/sec)", color = "orange"),linetype = "longdash") +
