@@ -165,7 +165,7 @@ function update_zipfile_input(session){
         $.get(tab_file, function(d){
             for (var i = 0; i < d.split('\n').length; i++){
               if(i >= 1){
-                d = d.split('\n')[i].replace(/  +/g, ' ').replace(/"/g, '').replace(/ /g, '\t').replace(/"123qwe456rty"/g, 'n/a')
+                d.split('\n')[i] = d.split('\n')[i].replace(/  +/g, ' ').replace(/"/g, '').replace(/ /g, '\t').replace(/"123qwe456rty"/g, 'n/a')
               }
             }
             zip.file(filename+'.mhp', d)
