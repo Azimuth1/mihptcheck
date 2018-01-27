@@ -163,10 +163,8 @@ function update_zipfile_input(session){
         zip = new JSZip(data);
 
         $.get(tab_file, function(d){
-            for (var i = 0; i < d.split('\n').length; i++){
-              if(i >= 1){
+            for (var i = 1; i < d.split('\n').length; i++){
                 d.split('\n')[i] = d.split('\n')[i].replace(/  +/g, ' ').replace(/"/g, '').replace(/ /g, '\t').replace(/"123qwe456rty"/g, 'n/a')
-              }
             }
             zip.file(filename+'.mhp', d)
             var content = zip.generate({type:"blob"});
