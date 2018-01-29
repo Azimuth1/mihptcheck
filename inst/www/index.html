@@ -156,7 +156,7 @@ function update_zipfile_input(session){
           return d
         }
       });
-      
+
       filename = zipname[0].substr(0, zipname[0].length - 4)
 
       JSZipUtils.getBinaryContent(file_names + '/' + zipname[0], function(err, data) {
@@ -166,20 +166,38 @@ function update_zipfile_input(session){
         zip = new JSZip(data);
 
         $.get(tab_file, function(d){
-            var new_file = d.split('\n')[0].replace(/"\s/gi, '"\t')
-            for (var i = 1; i < d.split('\n').length; i++){
-                new_file += "\n"
-                new_file += d.split('\n')[i]
-                            .replace(/"/g, '')
-                            .replace(/\s/gi, "\t").replace(/123qwe456rty/g, "n\/a")
-                            .replace(/n\/a/g, "n\/a\t")
-                            .replace(/\s/gi, "\t")
-            }
+            var new_file = d.split('\n')[0].replace(/\t\t\t/g, '"\t')
+            #for (var i = 1; i < d.split('\n').length; i++){
+            #    new_file += "\n"
+            #    new_file += d.split('\n')[i]
+            #                .replace(/"/g, '')
+            #                .replace(/\s/gi, "\t")
+            #                .replace(/123qwe456rty/g, "n\/a")
+            #                .replace(/n\/a/g, "n\/a\t")
+            #                .replace(/\s/gi, "\t")
+            #}
             //test push
             zip.file(filename+'.mhp', new_file)
             var content = zip.generate({type:"blob"});
             saveAs(content, zipname[0]);
         });
+
+#        $.get(tab_file, function(d){
+#            var new_file = d.split('\n')[0].replace(/"\s/gi, '"\t')
+#            for (var i = 1; i < d.split('\n').length; i++){
+#                new_file += "\n"
+#                new_file += d.split('\n')[i]
+#                            .replace(/"/g, '')
+#                            .replace(/\s/gi, "\t")
+#                            .replace(/123qwe456rty/g, "n\/a")
+#                            .replace(/n\/a/g, "n\/a\t")
+#                            .replace(/\s/gi, "\t")
+#            }
+#            //test push
+#            zip.file(filename+'.mhp', new_file)
+#            var content = zip.generate({type:"blob"});
+#            saveAs(content, zipname[0]);
+#        });
 
       });
   });
@@ -295,7 +313,7 @@ html, body {
   <div class="project_wrapper">
     <div class="flex-container">
       <div id="user_input_panel" class="flex-item well">
-        <div id="project_title">MIHPT Log QA v1.8</div>
+        <div id="project_title">MIHPT Log QA v1.9</div>
         <div id="credits">by <a href="http://www.azimuth1.com">Azimuth1</a></div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
