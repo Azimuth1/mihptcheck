@@ -166,7 +166,7 @@ function update_zipfile_input(session){
         zip = new JSZip(data);
 
         $.get(tab_file, function(d){
-            var new_file = d.split('\n')[0].replace(/\t\t\t/g, '"\t')
+            var new_file = d.replace(/\t\t\t/g, '"\t')
             //for (var i = 1; i < d.split('\n').length; i++){
             //    new_file += "\n"
             //    new_file += d.split('\n')[i]
@@ -314,7 +314,7 @@ html, body {
   <div class="project_wrapper">
     <div class="flex-container">
       <div id="user_input_panel" class="flex-item well">
-        <div id="project_title">MIHPT Log QA v1.10</div>
+        <div id="project_title">MIHPT Log QA v1.11</div>
         <div id="credits">by <a href="http://www.azimuth1.com">Azimuth1</a></div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
           <fieldset id="step_1">
