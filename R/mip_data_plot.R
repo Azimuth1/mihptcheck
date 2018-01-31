@@ -91,7 +91,7 @@ mip_data_plot <- function(mipfile, water_level, plotting){
           scale_x_reverse() +
           theme(legend.position="none")
 
-        plot_grid(p1, p2, align = "h", ncol = 2, rel_widths = c(3/4, 1/4))
+        plot_grid(p1, p2, align = "h", ncol = 2, rel_widths = c(1/2, 1/2))
 
 
     }, error = function(e){
