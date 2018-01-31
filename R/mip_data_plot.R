@@ -84,7 +84,7 @@ mip_data_plot <- function(mipfile, water_level, plotting){
 
         p2<-ggplot(data, aes(x = data$"Depth (ft)")) +
           geom_line(aes(y=data$"Est K (cm/sec)", color = "orange"),linetype = "longdash") +
-          scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/sec)",na.rm=TRUE),0.1)) +
+          scale_y_continuous(breaks=seq(0,max(data$"Est K (cm/sec)",na.rm=TRUE),0.005)) +
           scale_x_continuous(breaks=seq(0,max(data$"Depth (ft)",na.rm=TRUE),10)) +
           ggtitle("Est K") +
           xlab("Depth (ft)") +
