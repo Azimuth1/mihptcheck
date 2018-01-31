@@ -37,8 +37,10 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   #waterlevels<-rbind(waterlevels,wlevel)
   EstK <- 0.00745 * log10(data[,"HPT Flow Avg (mL/min)"] / p_c)  #cm/sec
   EstK[abovewaterlevel]<-NA
+  lowerlimit<-0.0
   upperlimit<-0.0264583  #cm/sec
   EstK[which(EstK>upperlimit)]<-upperlimit
+  EstK[which(EstK<lowerlimit)]<-lowerlimit
 
   data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
   data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
