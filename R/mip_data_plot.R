@@ -23,6 +23,7 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   p_grad <- 0.44
   p_c <- p
   belowwater <- which(d>water_level)
+  abovewaterlevel<- which(d<=water_level)
   p_c[belowwater] <- p[belowwater] - ((d[belowwater] - water_level) * p_grad)
 
   #intcpt<-as.numeric(water_level)
@@ -35,7 +36,10 @@ mip_data_plot <- function(mipfile, water_level, plotting){
   #wlevel<-(min(p)-intcpt)/p_grad
   #waterlevels<-rbind(waterlevels,wlevel)
   EstK <- 0.00745 * log10(data[,"HPT Flow Avg (mL/min)"] / p_c)  #cm/sec
-
+  EstK[abovewaterlevel]<-NULL
+  upperlimit<-0.0264583  #cm/sec
+  EstK[which(EstK>upperlimit)]<-upperlimit
+  
   data[,"Depth (ft)"] <- as.numeric(data[,"Depth (ft)"])
   data[,"HPT Press. Avg (psi)"] <- as.numeric(data[,"HPT Press. Avg (psi)"])
   data$"Hydrostatic Pressure (psi)" <- 0
