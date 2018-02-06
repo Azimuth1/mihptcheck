@@ -12,6 +12,6 @@ library(opencpu)
 ocpu_start_app('Azimuth1/mihptcheck')
 ```
 
-Temporary Development branch located at:
+Development / Testing at:
 
 http://azimuth1.ocpu.io/mihptcheck/www/dev.html
