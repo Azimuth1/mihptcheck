@@ -36,7 +36,7 @@ $(document).ready(function() {
   $("#water_level").attr("disabled", "disabled");
   $("#session_url").attr("disabled", "disabled");
 
-  
+
   //automatically upload CSV file on change.
   $("#mipfile").on("change", function() {
     //verify that a file is selected
@@ -178,11 +178,11 @@ $(document).ready(function() {
 <body>
   <div class="project_wrapper">
     <div class="flex-container">
-      <div id="header_tools">
-        <a id="session_url">Session URL</a>
-        <div id="dev_check"></div>
-      </div>
       <div id="user_input_panel" class="flex-item well">
+          <div id="header_tools">
+            <a id="session_url">Session URL</a>
+            <div id="dev_check"></div>
+          </div>
         <div id="project_title">MIHPT Log QA v1.27</div>
         <div id="credits">by <a href="http://www.azimuth1.com">Azimuth1</a></div>
         <form role="form" id="uploadform" enctype="multipart/form-data">
