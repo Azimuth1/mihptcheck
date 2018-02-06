@@ -19,20 +19,23 @@
 <script src="scripts/bootstrap/js/bootstrap.js"> </script>
 <script src="scripts/jqueryui/jquery-ui-1.10.3.custom.js"> </script>
 
+<!-- OCPU Helper JS scriptsZ -->
+<script src="js/custom.js"> </script>
+
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
 <script type="text/javascript">
 
 $(document).ready(function() {
-//Display if dev.html or not
-  var cur_url = window.location.href.split(/[\\\/]/)[window.location.href.split(/[\\\/]/).length - 1];
-  if (cur_url == "dev.html") {
-    $("#dev_check").html(cur_url);
-  }
+
+  //initialization
+  dev_toggle()
+
   $("#convert_button").attr("disabled", "disabled");
   $("#preview_button").attr("disabled", "disabled");
   $("#water_level").attr("disabled", "disabled");
   $("#session_url").attr("disabled", "disabled");
+  
   //automatically upload CSV file on change.
   $("#mipfile").on("change", function() {
     //verify that a file is selected
