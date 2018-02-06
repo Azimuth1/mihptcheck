@@ -24,174 +24,147 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-
-  //Display if dev.html or not
-  var cur_url = window.location.href.split(/[\\\/]/)[window.location.href.split(/[\\\/]/).length-1];
-  if(cur_url=="dev.html"){
+//Display if dev.html or not
+  var cur_url = window.location.href.split(/[\\\/]/)[window.location.href.split(/[\\\/]/).length - 1];
+  if (cur_url == "dev.html") {
     $("#dev_check").html(cur_url);
   }
-
   $("#convert_button").attr("disabled", "disabled");
   $("#preview_button").attr("disabled", "disabled");
   $("#water_level").attr("disabled", "disabled");
   $("#session_url").attr("disabled", "disabled");
   //automatically upload CSV file on change.
-  $("#mipfile").on("change", function(){
-
-  //verify that a file is selected
-  if($("#mipfile")[0].files[0]){
-
+  $("#mipfile").on("change", function() {
+    //verify that a file is selected
+    if ($("#mipfile")[0].files[0]) {
       $("#successdiv").empty();
       $("#errordiv").empty()
-
       //////////////////////////////
       //Upload and validate the data
       //////////////////////////////
-
       var req = ocpu.call("zip_validation", {
-          mipfile : $("#mipfile")[0].files[0]
-      }, function(session){
-          $("#session_url").removeAttr("disabled");
-          $("#session_url").attr("href", session.getLoc()).attr("target","_blank")
-          $("#convert_button").attr("href", session.getLoc())
-          $("#water_level").removeAttr("disabled");
-          $("#convert_button").removeAttr("disabled");
-          $("#preview_button").removeAttr("disabled");
-          $("#step_2").css("opacity", 1);
-          $("#step_3").css("opacity", 1);
-          successmsg("Zip file successfully loaded!");
-      }).fail(function(jqXHR){
-          $("#step_2").css("opacity", 0.2);
-          $("#step_3").css("opacity", 0.2);
-          errormsg(jqXHR.responseText);
-      }).always(function(){
+        mipfile: $("#mipfile")[0].files[0]
+      }, function(session) {
+        $("#session_url").removeAttr("disabled");
+        $("#session_url").attr("href", session.getLoc()).attr("target", "_blank")
+        $("#convert_button").attr("href", session.getLoc())
+        $("#water_level").removeAttr("disabled");
+        $("#convert_button").removeAttr("disabled");
+        $("#preview_button").removeAttr("disabled");
+        $("#step_2").css("opacity", 1);
+        $("#step_3").css("opacity", 1);
+        successmsg("Zip file successfully loaded!");
+      }).fail(function(jqXHR) {
+        $("#step_2").css("opacity", 0.2);
+        $("#step_3").css("opacity", 0.2);
+        errormsg(jqXHR.responseText);
+      }).always(function() {
         var session_url = document.getElementById("session_url");
         session_url.style.cursor = "pointer";
-    });
+      });
     }
-});
-
-//R output to popup
-function successmsg(text){
+  });
+  //R output to popup
+  function successmsg(text) {
     $("#successdiv").empty().append('<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
-}
-
-//R output to popup
-function errormsg(text){
+  }
+  //R output to popup
+  function errormsg(text) {
     $("#convert_button").attr("disabled", "disabled");
     $("#water_level").attr("disabled", "disabled");
     $("#errordiv").empty().append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert">&times;</a>' + text + '</div>');
-}
+  }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-$("#convert_button").on("click", function(){
-
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  $("#convert_button").on("click", function() {
     //////////////////////////////
     //Water level calculations
     //////////////////////////////
     var req = ocpu.call("mip_data_plot", {
-      mipfile : $("#mipfile")[0].files[0],
-      water_level : $('#water_level').val(),
-      plotting : 'FALSE'
-    }, function(session){
+      mipfile: $("#mipfile")[0].files[0],
+      water_level: $('#water_level').val(),
+      plotting: 'FALSE'
+    }, function(session) {
       //success
-      $("#session_url").attr("href", session.getLoc()).attr("target","_blank")
+      $("#session_url").attr("href", session.getLoc()).attr("target", "_blank")
       update_zipfile_input(session)
       $("#convert_button").attr("disabled", "disabled");
-    }).fail(function(jqXHR){
-       //failure
-       $("#convert_button").attr("disabled", "disabled");
-       errormsg(jqXHR.responseText);
-      })
-});
-
-  //Check if user changes water level input
-  document.getElementById("water_level").addEventListener('change', function(){
-      $("#preview_button").removeAttr("disabled");
-      $("#convert_button").removeAttr("disabled");
+    }).fail(function(jqXHR) {
+      //failure
+      $("#convert_button").attr("disabled", "disabled");
+      errormsg(jqXHR.responseText);
+    })
   });
-
-
-$("#preview_button").on("click", function(){
-
+  //Check if user changes water level input
+  document.getElementById("water_level").addEventListener('change', function() {
+    $("#preview_button").removeAttr("disabled");
+    $("#convert_button").removeAttr("disabled");
+  });
+  $("#preview_button").on("click", function() {
     //////////////////////////////
     //Plot Preview
     //////////////////////////////
-
     //create the plot area on the plotdiv element
     var req = $("#plotdiv").rplot("mip_data_plot", {
-      mipfile : $("#mipfile")[0].files[0],
-      water_level : $('#water_level').val(),
+      mipfile: $("#mipfile")[0].files[0],
+      water_level: $('#water_level').val(),
       plotting: 'TRUE'
-    }, function(session){
+    }, function(session) {
       //configure inputs on/off
       //success
-      $("#session_url").attr("href", session.getLoc()).attr("target","_blank")
+      $("#session_url").attr("href", session.getLoc()).attr("target", "_blank")
       $("#preview_button").attr("disabled", "disabled");
       $("#convert_button").removeAttr("disabled");
-    }).fail(function(jqXHR){
+    }).fail(function(jqXHR) {
       //failure
       $("#preview_button").removeAttr("disabled");
       $(".input-medium").removeAttr("disabled");
       $("#convert_button").attr("disabled", "disabled");
       errormsg(jqXHR.responseText);
-     })
-
-});
-
-//Javascript function using jszip.j / filesaver.js
-//to package .zip output
-function update_zipfile_input(session){
-
+    })
+  });
+  //Javascript function using jszip.j / filesaver.js
+  //to package .zip output
+  function update_zipfile_input(session) {
     //////////////////////////////
     //Update .zipfile
     //////////////////////////////
-
-    csv_file = session.getLoc()+'R/.val/csv'
+    csv_file = session.getLoc() + 'R/.val/csv'
     data_file = $("#mipfile")[0].files[0];
-    file_names = session.getLoc()+'files'
-
-    $.get(file_names, function(f){
-
+    file_names = session.getLoc() + 'files'
+    $.get(file_names, function(f) {
       file_list = f.split('\n')
-
-      zipname = file_list.filter(function(d){
-        if(d.substr(d.length - 3)=="zip"){
+      zipname = file_list.filter(function(d) {
+        if (d.substr(d.length - 3) == "zip") {
           return d
         }
       });
-
       filename = zipname[0].substr(0, zipname[0].length - 4)
-
       JSZipUtils.getBinaryContent(file_names + '/' + zipname[0], function(err, data) {
-
-        if(err) {throw err;}// or handle err
-
+        if (err) {
+          throw err;
+        } // or handle err
         zip = new JSZip(data);
-
-        $.get(csv_file, function(d){
-            var new_file = d.replace(/["]/g, '').replace(/123qwe456rty/g, "n\/a").replace(/[,]/g, '\t')
-            zip.file(filename+'.mhp', new_file)
-            var content = zip.generate({type:"blob"});
-            saveAs(content, zipname[0]);
+        $.get(csv_file, function(d) {
+          var new_file = d.replace(/["]/g, '').replace(/123qwe456rty/g, "n\/a").replace(/[,]/g, '\t')
+          zip.file(filename + '.mhp', new_file)
+          var content = zip.generate({
+            type: "blob"
+          });
+          saveAs(content, zipname[0]);
         });
       });
+    });
+  }
+  $(document).ajaxStart(function() {
+    $(".progress").show();
   });
-}
-
-$(document).ajaxStart(function() {
-  $(".progress").show();
-});
-
-$(document).ajaxStop(function() {
+  $(document).ajaxStop(function() {
   $(".progress").hide();
+  });
 });
-
-});
-
 </script>
 
 <link href="styles/bootstrap_two_panel.css" rel="stylesheet" type="text/css">
