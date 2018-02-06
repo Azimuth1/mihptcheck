@@ -92,17 +92,20 @@ body{
 	margin-top: 20px;
 }
 
+/* BANNER CSS */
+#header_tools{
+	position: absolute;
+	top: 20px;
+}
+
 #session_url{
-  cursor: not-allowed;
-  position: absolute;
-  top: 20px;
-  left: 360px;
+	display:inline-block;
+	cursor: not-allowed;
 }
 
 #dev_check{
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    font-weight: bold;
-    color: salmon;
+	display:inline-block;
+	font-weight: bold;
+	color: salmon;
 }
+/* ////////// */
