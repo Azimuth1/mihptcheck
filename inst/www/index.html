@@ -25,12 +25,18 @@
 
 $(document).ready(function() {
 
-    $("#convert_button").attr("disabled", "disabled");
-    $("#preview_button").attr("disabled", "disabled");
-    $("#water_level").attr("disabled", "disabled");
-    $("#session_url").attr("disabled", "disabled");
-    //automatically upload CSV file on change.
-    $("#mipfile").on("change", function(){
+  //Display if dev.html or not
+  var cur_url = window.location.href.split(/[\\\/]/)[window.location.href.split(/[\\\/]/).length-1];
+  if(cur_url=="dev.html"){
+    $("#dev_check").html(cur_url);
+  }
+
+  $("#convert_button").attr("disabled", "disabled");
+  $("#preview_button").attr("disabled", "disabled");
+  $("#water_level").attr("disabled", "disabled");
+  $("#session_url").attr("disabled", "disabled");
+  //automatically upload CSV file on change.
+  $("#mipfile").on("change", function(){
 
   //verify that a file is selected
   if($("#mipfile")[0].files[0]){
@@ -229,6 +235,7 @@ $(document).ajaxStop(function() {
         </div>
       </div>
       <a id="session_url">Session URL</a>
+      <div id="dev_check"></div>
     </div>
     <div id="plotdiv" class="flex-item well"></div>
   </div>
